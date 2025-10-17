@@ -111,7 +111,7 @@ export function WelcomeModal() {
               onClick={() => handleClose(true)}
               className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
             >
-              Got it! Don't show again
+              Got it! Don&apos;t show again
             </button>
             <button
               onClick={() => handleClose(false)}

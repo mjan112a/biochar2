@@ -11,13 +11,6 @@ import { Icon } from '@/components/ui/Icon';
 import { useSystemView } from '@/hooks/useSystemView';
 import { ComponentName } from '@/types';
 
-interface ComponentPosition {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
 interface ComponentBoxProps {
   id: ComponentName;
   name: string;
@@ -56,65 +49,6 @@ function ComponentBox({ id, name, position, subtitle, onPositionMeasured }: Comp
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-interface ArrowProps {
-  from: { x: string; y: string };
-  to: { x: string; y: string };
-  label?: string;
-  labelPosition?: 'top' | 'bottom' | 'left' | 'right';
-}
-
-function Arrow({ from, to, label, labelPosition = 'top' }: ArrowProps) {
-  return (
-    <div className="absolute pointer-events-none">
-      <svg
-        className="absolute"
-        style={{
-          left: from.x,
-          top: from.y,
-          width: `calc(${to.x} - ${from.x})`,
-          height: `calc(${to.y} - ${from.y})`,
-          overflow: 'visible'
-        }}
-      >
-        <defs>
-          <marker
-            id="arrowhead"
-            markerWidth="10"
-            markerHeight="7"
-            refX="9"
-            refY="3.5"
-            orient="auto"
-          >
-            <polygon points="0 0, 10 3.5, 0 7" fill="#374151" />
-          </marker>
-        </defs>
-        <line
-          x1="0"
-          y1="0"
-          x2="100%"
-          y2="100%"
-          stroke="#374151"
-          strokeWidth="2"
-          markerEnd="url(#arrowhead)"
-        />
-      </svg>
-      {label && (
-        <div
-          className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow-sm whitespace-nowrap"
-          style={{
-            left: `calc((${from.x} + ${to.x}) / 2)`,
-            top: labelPosition === 'top' 
-              ? `calc((${from.y} + ${to.y}) / 2 - 20px)`
-              : `calc((${from.y} + ${to.y}) / 2 + 10px)`,
-          }}
-        >
-          {label}
-        </div>
-      )}
     </div>
   );
 }

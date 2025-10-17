@@ -25,6 +25,7 @@ import economicData from '@/data/benefits/economic.json';
 import environmentalData from '@/data/benefits/environmental.json';
 import reuseData from '@/data/benefits/reuse.json';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const componentDataMap: Record<string, any> = {
   'chicken-house': chickenHouseData,
   'processing-plant': processingPlantData,
@@ -38,6 +39,7 @@ const benefitsDataMap: Record<string, any> = {
   environmental: environmentalData,
   reuse: reuseData,
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export default function ComponentDetailPage() {
   const params = useParams();
@@ -132,7 +134,7 @@ export default function ComponentDetailPage() {
                 </h4>
                 <p className="text-gray-600 mb-4 max-w-md mx-auto">
                   This component is part of the proposed circular economy system. 
-                  Toggle to "Proposed System" to see how it integrates into the biochar production process.
+                  Toggle to &quot;Proposed System&quot; to see how it integrates into the biochar production process.
                 </p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-lg">
                   <span className="text-sm text-amber-800">
@@ -143,7 +145,7 @@ export default function ComponentDetailPage() {
             ) : (
               <>
                 <p className="text-gray-700 mb-6">
-                  {currentViewData.description}
+                  {currentViewData?.description}
                 </p>
 
                 {/* Subsystem Diagram */}
@@ -151,19 +153,19 @@ export default function ComponentDetailPage() {
                   <SubsystemDiagram
                     componentId={componentId as ComponentName}
                     componentName={componentData.name}
-                    inputs={currentViewData.inputs}
-                    outputs={currentViewData.outputs}
+                    inputs={currentViewData?.inputs || []}
+                    outputs={currentViewData?.outputs || []}
                   />
                 </div>
               </>
             )}
 
             {/* Issues or Benefits */}
-            {systemView === 'current' && 'issues' in currentViewData ? (
+            {systemView === 'current' && currentViewData && 'issues' in currentViewData ? (
               <div>
                 <h4 className="font-semibold text-red-700 mb-3">Key Issues:</h4>
                 <ul className="grid md:grid-cols-2 gap-2">
-                  {currentViewData.issues.map((issue: string, idx: number) => (
+                  {currentViewData.issues?.map((issue: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2 text-gray-700">
                       <span className="text-red-500">⚠</span>
                       <span>{issue}</span>
@@ -171,11 +173,11 @@ export default function ComponentDetailPage() {
                   ))}
                 </ul>
               </div>
-            ) : 'benefits' in currentViewData ? (
+            ) : currentViewData && 'benefits' in currentViewData ? (
               <div>
                 <h4 className="font-semibold text-green-700 mb-3">Key Benefits:</h4>
                 <ul className="grid md:grid-cols-2 gap-2">
-                  {currentViewData.benefits.map((benefit: string, idx: number) => (
+                  {currentViewData.benefits?.map((benefit: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2 text-gray-700">
                       <span className="text-green-500">✓</span>
                       <span>{benefit}</span>
@@ -212,7 +214,7 @@ export default function ComponentDetailPage() {
                   <p className="text-gray-700 mb-4">{data.description}</p>
                   
                   <div className="grid gap-4">
-                    {data.items.map((item: any, idx: number) => (
+                    {data.items.map((item: { title: string; metric?: string; description: string }, idx: number) => (
                       <div key={idx} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-gray-900">{item.title}</h4>

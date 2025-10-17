@@ -28,7 +28,7 @@ export function Icon({ name, size = 'md', className = '' }: IconProps) {
 
   if (isUsingPlaceholder()) {
     // Use Lucide React icon
-    const LucideIcon = (LucideIcons as any)[iconIdentifier] as LucideIcon;
+    const LucideIcon = (LucideIcons as unknown as Record<string, LucideIcon>)[iconIdentifier];
     
     if (!LucideIcon) {
       console.warn(`Icon "${iconIdentifier}" not found in Lucide icons`);
