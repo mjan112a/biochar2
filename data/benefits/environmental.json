@@ -1,0 +1,72 @@
+{
+  "category": "environmental",
+  "title": "Environmental Benefits",
+  "description": "Net-negative carbon emissions, air quality improvements, and water protection through complete nutrient recovery",
+  "items": [
+    {
+      "title": "Net-Negative Carbon Emissions",
+      "description": "System removes more greenhouse gases than it emits through stable carbon sequestration and fossil fuel displacement.",
+      "metric": "370-660 kg CO₂-eq reduction per tonne",
+      "details": [
+        "Biochar sequestration: 120-160 kg CO₂/tonne litter",
+        "Fossil fuel displacement: 200-400 kg CO₂ through RNG",
+        "Prevented methane emissions: 50-100 kg CO₂-eq",
+        "Carbon stability: 65-89% remains after 100 years",
+        "Total lifecycle: -864 to -885 kg CO₂-eq per tonne",
+        "2.5 tonnes CO₂ removed per tonne biochar produced"
+      ]
+    },
+    {
+      "title": "Air Quality Improvements",
+      "description": "Dramatic reduction in harmful emissions improving health for workers, animals, and communities.",
+      "metric": "90% ammonia reduction",
+      "details": [
+        "90% reduction in ammonia emissions with biochar bedding",
+        "54-97% reduction in nitrous oxide from soils",
+        "Hydrogen sulfide substantially reduced",
+        "Volatile organic compounds decreased",
+        "Improved air quality in poultry houses",
+        "Better respiratory health for birds and workers"
+      ]
+    },
+    {
+      "title": "Water Quality Protection",
+      "description": "Complete nutrient recovery prevents groundwater contamination and watershed impairment.",
+      "metric": "Zero nutrient runoff",
+      "details": [
+        "95% phosphorus recovery across all products",
+        "70% nitrogen recovery",
+        "Zero nutrient runoff to waterways",
+        "Biochar immobilizes excess nutrients",
+        "Protects watersheds like Chesapeake Bay",
+        "Eliminates groundwater contamination risk"
+      ]
+    },
+    {
+      "title": "Waste Elimination",
+      "description": "100% of poultry waste converted to valuable products with no disposal needed.",
+      "metric": "100% utilization",
+      "details": [
+        "Every component of waste becomes valuable product",
+        "40+ million tonnes annually (USA potential)",
+        "Eliminated methane from decomposing stockpiles",
+        "No landfill disposal required",
+        "Converted environmental liability to asset",
+        "Circular economy closes all loops"
+      ]
+    },
+    {
+      "title": "Soil Health Enhancement",
+      "description": "Biochar improves soil structure, water retention, and microbial activity for long-term agricultural benefits.",
+      "metric": "Multiple soil improvements",
+      "details": [
+        "Better nutrient management and retention",
+        "Improved soil aeration and structure",
+        "Enhanced water management and retention",
+        "Superior habitat for beneficial microbiomes",
+        "pH adjustment for acidic soils",
+        "Reduced need for pesticides and fertilizers"
+      ]
+    }
+  ]
+}

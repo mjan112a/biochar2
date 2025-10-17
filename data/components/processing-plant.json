@@ -1,0 +1,109 @@
+{
+  "id": "processing-plant",
+  "name": "Processing Plant",
+  "description": "Central facility processing 1 million birds per week, generating 1,000 tons of litter weekly from nearby farms",
+  "keyMetric": {
+    "label": "Annual Processing Capacity",
+    "value": "52,000 tons/year"
+  },
+  "current": {
+    "description": "Processing plants serve as collection hubs for litter from multiple nearby farms, creating logistics and storage challenges",
+    "inputs": [
+      {
+        "type": "material",
+        "label": "Live chickens",
+        "amount": "From farms"
+      },
+      {
+        "type": "manure",
+        "label": "Litter from farms",
+        "amount": "1,000 tons/week"
+      },
+      {
+        "type": "energy",
+        "label": "Fossil fuels",
+        "amount": "For operations"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "material",
+        "label": "Processed chicken products"
+      },
+      {
+        "type": "manure",
+        "label": "Processing waste/offal",
+        "amount": "→ Direct to land"
+      },
+      {
+        "type": "manure",
+        "label": "Stockpiled litter",
+        "amount": "52,000 tons/year → Land"
+      }
+    ],
+    "issues": [
+      "Collection and transportation costs",
+      "Storage and handling challenges",
+      "Methane emissions from stockpiling",
+      "Odor complaints from neighbors",
+      "Environmental regulatory pressure",
+      "Limited disposal options"
+    ]
+  },
+  "proposed": {
+    "description": "Centralized conversion facility co-located with processing plant for optimal logistics and economies of scale",
+    "inputs": [
+      {
+        "type": "material",
+        "label": "Live chickens",
+        "amount": "From farms"
+      },
+      {
+        "type": "manure",
+        "label": "Fresh litter",
+        "amount": "52,000 tons/year from farms"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "material",
+        "label": "Processed chicken products"
+      },
+      {
+        "type": "manure",
+        "label": "Offal/DAF/FOG",
+        "amount": "→ Anaerobic digester"
+      },
+      {
+        "type": "material",
+        "label": "Dead chickens",
+        "amount": "→ Anaerobic digester"
+      },
+      {
+        "type": "manure",
+        "label": "Litter to AD",
+        "amount": "50-70% of input"
+      },
+      {
+        "type": "manure",
+        "label": "Dry litter to pyrolysis",
+        "amount": "30-50% of input"
+      }
+    ],
+    "benefits": [
+      "Minimized transportation distances",
+      "Economies of scale: $15-30M revenue potential per facility",
+      "Eliminated storage and odor issues",
+      "Multiple revenue streams from single input",
+      "100+ construction jobs, 20-30 permanent operations jobs",
+      "Converted liability to asset",
+      "Strategic location near poultry-dense regions"
+    ]
+  },
+  "technicalDetails": {
+    "scale": "Typical plant processes 1M birds/week = 52M birds/year",
+    "serviceArea": "10-20 farms within close proximity",
+    "optimalLocation": "Dense poultry regions: Delmarva, Southeast, Arkansas",
+    "economics": "4-5 year payback at 100,000+ tonnes/year scale"
+  }
+}

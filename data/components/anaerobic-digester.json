@@ -1,0 +1,107 @@
+{
+  "id": "anaerobic-digester",
+  "name": "Anaerobic Digester",
+  "description": "Two-stage digestion system producing renewable natural gas with 25-37% enhanced methane production when biochar is added",
+  "keyMetric": {
+    "label": "Methane Enhancement",
+    "value": "25-37% with biochar"
+  },
+  "current": {
+    "description": "Anaerobic digestion alone faces ammonia inhibition challenges and lower methane yields with poultry litter",
+    "inputs": [
+      {
+        "type": "manure",
+        "label": "Poultry litter",
+        "amount": "100% of input"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "gas",
+        "label": "Biogas",
+        "amount": "50-65% methane"
+      },
+      {
+        "type": "material",
+        "label": "Digestate",
+        "amount": "70% mass reduction"
+      }
+    ],
+    "issues": [
+      "Ammonia inhibition from high-nitrogen litter",
+      "Lower methane yields",
+      "pH instability",
+      "Longer retention times required",
+      "Digestate disposal challenges",
+      "Complex nutrient balancing"
+    ]
+  },
+  "proposed": {
+    "description": "Integrated system receiving syngas from pyrolysis plus biochar addition for enhanced performance",
+    "inputs": [
+      {
+        "type": "manure",
+        "label": "Litter + char",
+        "amount": "50-70% from processing plant"
+      },
+      {
+        "type": "manure",
+        "label": "Offal/DAF/FOG",
+        "amount": "From processing plant"
+      },
+      {
+        "type": "material",
+        "label": "Dead chickens",
+        "amount": "From processing plant"
+      },
+      {
+        "type": "gas",
+        "label": "H₂-rich syngas",
+        "amount": "From pyrolysis unit"
+      },
+      {
+        "type": "biochar",
+        "label": "Biochar enhancement",
+        "amount": "5-20 g/L from pyrolysis"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "gas",
+        "label": "Bio-methane/RNG",
+        "amount": "→ Pipeline (70-110 Nm³/ton)"
+      },
+      {
+        "type": "gas",
+        "label": "CO₂",
+        "amount": "Captured/released"
+      },
+      {
+        "type": "material",
+        "label": "Digestate liquids",
+        "amount": "→ Pyrolysis unit"
+      },
+      {
+        "type": "material",
+        "label": "Digestate (reduced volume)",
+        "amount": "→ Farm/land application"
+      }
+    ],
+    "benefits": [
+      "25-37% more methane production than digestion alone",
+      "32% reduction in ammonia inhibition",
+      "pH buffering to optimal 7.5-8.2 range",
+      "3.38-4.66 day retention (vs 15-30 days typical)",
+      "RNG value: $6-12/MMBTU with RIN/LCFS credits",
+      "4-house farm example: 8,779 MMBtu/year methane",
+      "Biochar provides microbial electron transfer surfaces"
+    ]
+  },
+  "technicalDetails": {
+    "configuration": "Two-stage: thermophilic (55°C) then mesophilic (35-37°C)",
+    "retention": "Stage 1: 1-2 days, Stage 2: 3-15 days",
+    "biocharRole": "Conductive surfaces, ammonia adsorption, pH buffer, biofilm support",
+    "energyBalance": "60-75% heat recovery efficiency",
+    "synergisticEffect": "Integration produces unexpected benefits exceeding additive effects"
+  }
+}

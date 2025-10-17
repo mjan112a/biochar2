@@ -1,0 +1,103 @@
+{
+  "id": "pyrolysis-unit",
+  "name": "Pyrolysis Unit",
+  "description": "Thermal conversion system operating at 400-600°C producing biochar, bio-oil, and hydrogen-rich syngas",
+  "keyMetric": {
+    "label": "Biochar Yield",
+    "value": "40-50% by weight"
+  },
+  "current": {
+    "description": "No commercial pyrolysis deployment for poultry litter - technology gap represents market opportunity",
+    "inputs": [
+      {
+        "type": "manure",
+        "label": "Raw litter",
+        "amount": "High moisture content"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "manure",
+        "label": "Wasted potential",
+        "amount": "Energy unused"
+      }
+    ],
+    "issues": [
+      "No carbon sequestration",
+      "No biochar production",
+      "Energy content wasted",
+      "Nutrients not preserved",
+      "Lost revenue opportunities",
+      "Pilot-scale only, not commercial"
+    ]
+  },
+  "proposed": {
+    "description": "Integrated pyrolysis producing biochar while generating syngas to enhance anaerobic digestion",
+    "inputs": [
+      {
+        "type": "manure",
+        "label": "Dried/decaked litter",
+        "amount": "30-50% from processing plant"
+      },
+      {
+        "type": "material",
+        "label": "Digestate liquids",
+        "amount": "From AD for drying"
+      },
+      {
+        "type": "energy",
+        "label": "Process heat",
+        "amount": "From syngas combustion"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "biochar",
+        "label": "Biochar to chicken house",
+        "amount": "For bedding (fresh litter mix)"
+      },
+      {
+        "type": "biochar",
+        "label": "Biochar to AD",
+        "amount": "5-20 g/L enhancement"
+      },
+      {
+        "type": "biochar",
+        "label": "Biochar to farm",
+        "amount": "Soil amendment (carbon sequestered)"
+      },
+      {
+        "type": "gas",
+        "label": "Syngas/H₂ to AD",
+        "amount": "Methane enhancement"
+      },
+      {
+        "type": "energy",
+        "label": "Syngas/Energy",
+        "amount": "Process heat (sim/hot water)"
+      },
+      {
+        "type": "material",
+        "label": "Bio-oil",
+        "amount": "112-120 kg/ton (28-30% yield)"
+      }
+    ],
+    "benefits": [
+      "Carbon sequestration: 120-160 kg CO₂/ton litter",
+      "75-80% phosphorus retention in biochar",
+      "80-85% potassium retention",
+      "Syngas enhances digester methane by 20%+",
+      "Net energy output ratio: 4-7.6:1",
+      "Thermal self-sufficiency through heat recovery",
+      "4-house farm: 3,278 MMBtu/year net useable heat"
+    ]
+  },
+  "technicalDetails": {
+    "temperature": "400-600°C optimal for poultry litter",
+    "residence": "30-90 minutes",
+    "massBalance": "Per 1,000 kg input → 160-200 kg biochar, 112-120 kg bio-oil, 88-120 kg syngas",
+    "biocharProperties": "pH 10-10.5, 42-47% carbon, 50+ m²/g surface area",
+    "carbonStability": "65-89% remains after 100 years",
+    "heatIntegration": "Cascading recovery: pyrolysis → drying → digester heating"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "farm-waterways",
+  "name": "Farm & Waterways",
+  "description": "Agricultural land application and watershed protection through complete nutrient recovery and zero-waste operations",
+  "keyMetric": {
+    "label": "Nutrient Recovery",
+    "value": "95% P, 70% N"
+  },
+  "current": {
+    "description": "Traditional land application creates nutrient runoff, water contamination, and regulatory compliance challenges",
+    "inputs": [
+      {
+        "type": "manure",
+        "label": "Raw litter application",
+        "amount": "Direct spreading"
+      },
+      {
+        "type": "energy",
+        "label": "Diesel",
+        "amount": "For transport/spreading"
+      },
+      {
+        "type": "material",
+        "label": "Labor",
+        "amount": "Manual application"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "water",
+        "label": "Nutrient runoff",
+        "amount": "Excess N & P → Waterways"
+      },
+      {
+        "type": "gas",
+        "label": "N₂O emissions",
+        "amount": "54-97% from decomposition"
+      },
+      {
+        "type": "material",
+        "label": "Crops",
+        "amount": "Conventional yields"
+      }
+    ],
+    "issues": [
+      "Groundwater contamination from excess nitrogen and phosphorus",
+      "Watershed impairment (Chesapeake Bay, others)",
+      "Regulatory pressure and compliance costs",
+      "Nutrient management plan requirements",
+      "54-97% N₂O emissions from decomposition",
+      "Limited control over nutrient release timing",
+      "Transportation and spreading costs"
+    ]
+  },
+  "proposed": {
+    "description": "Circular system returning enhanced biochar-fertilizer products with controlled nutrient release and zero runoff",
+    "inputs": [
+      {
+        "type": "biochar",
+        "label": "Biochar",
+        "amount": "Stable carbon with nutrients (from pyrolysis)"
+      },
+      {
+        "type": "material",
+        "label": "Digestate fertilizer",
+        "amount": "Liquid, controlled-release (from AD)"
+      },
+      {
+        "type": "energy",
+        "label": "Reduced diesel",
+        "amount": "90% less hauling (mass reduction)"
+      },
+      {
+        "type": "material",
+        "label": "Labor",
+        "amount": "Reduced application effort"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "material",
+        "label": "Zero nutrient runoff",
+        "amount": "Protected waterways"
+      },
+      {
+        "type": "gas",
+        "label": "Reduced GHG emissions",
+        "amount": "54-97% N₂O reduction"
+      },
+      {
+        "type": "material",
+        "label": "Improved soil health",
+        "amount": "Long-term carbon sequestration"
+      },
+      {
+        "type": "material",
+        "label": "Healthier crops",
+        "amount": "Better yields"
+      }
+    ],
+    "benefits": [
+      "95% phosphorus recovery across all products",
+      "70% nitrogen recovery",
+      "Zero nutrient runoff to waterways",
+      "54-97% reduction in N₂O emissions",
+      "Biochar immobilizes excess nutrients",
+      "Controlled-release fertilizer characteristics",
+      "90% reduction in hauling costs (mass reduction)",
+      "Premium soil amendment value: $80-1,300/ton",
+      "Agricultural trials: $125-239 added value per ton",
+      "Two-year payback for farmers"
+    ]
+  },
+  "technicalDetails": {
+    "biocharBenefits": "Better nutrient management, improved aeration, water retention, microbial habitat",
+    "soilHealth": "pH adjustment, disease resistance, reduced pesticide needs",
+    "nutrientManagement": "Prevents N loss and runoff, provides slow-release",
+    "massReduction": "From 10 truckloads to 1 for application",
+    "nrcsGrants": "$800/ton through NRCS 336 programs (1-3 years)",
+    "marketOpportunity": "Concentrated regions: Delmarva, Southeast, Arkansas"
+  }
+}

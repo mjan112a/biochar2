@@ -1,0 +1,86 @@
+{
+  "id": "chicken-house",
+  "name": "Chicken House",
+  "description": "Housing for 25,000-50,000 broilers producing 108.5 tons of litter annually per house",
+  "keyMetric": {
+    "label": "Carbon Credit Value",
+    "value": "$177-525/ton CO₂"
+  },
+  "current": {
+    "description": "Traditional poultry operations generate significant waste with disposal costs and environmental liabilities",
+    "inputs": [
+      {
+        "type": "material",
+        "label": "Fresh pine shavings"
+      },
+      {
+        "type": "material",
+        "label": "Feed"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "material",
+        "label": "Live chickens",
+        "amount": "To processing plant"
+      },
+      {
+        "type": "manure",
+        "label": "Poultry litter",
+        "amount": "108.5 tons/year per house → Direct to land"
+      }
+    ],
+    "issues": [
+      "High ammonia emissions affecting bird and worker health",
+      "Disposal costs $10-30 per tonne",
+      "Moisture management challenges",
+      "Regulatory compliance costs",
+      "1-3% higher mortality from poor air quality"
+    ]
+  },
+  "proposed": {
+    "description": "Biochar-enhanced poultry operations with circular nutrient management and improved air quality",
+    "inputs": [
+      {
+        "type": "material",
+        "label": "Fresh pine shavings"
+      },
+      {
+        "type": "material",
+        "label": "Feed"
+      },
+      {
+        "type": "biochar",
+        "label": "Biochar bedding",
+        "amount": "5-10% by volume (from pyrolysis)"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "material",
+        "label": "Live chickens",
+        "amount": "To processing plant"
+      },
+      {
+        "type": "manure",
+        "label": "Enhanced litter + biochar",
+        "amount": "108.5 tons/year → Processing plant"
+      }
+    ],
+    "benefits": [
+      "90% reduction in ammonia emissions",
+      "1-3% mortality reduction = significant savings",
+      "Better feed conversion ratios",
+      "Reduced foot damage (chicken feet worth as much as whole chicken)",
+      "Eliminated disposal costs",
+      "NRCS 336 grants: $800/ton for biochar-enhanced litter",
+      "Premium pricing in some markets for biochar-raised poultry"
+    ]
+  },
+  "technicalDetails": {
+    "scale": "Average 25,000 SF house producing 976,800 lbs birds/year",
+    "production": "108,533 birds/year, 5-7 flocks annually",
+    "litterComposition": "High nitrogen (2-6%), high phosphorus (1-3%), bedding material",
+    "energyContent": "15-17 MJ/kg heating value"
+  }
+}
