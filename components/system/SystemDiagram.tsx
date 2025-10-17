@@ -297,7 +297,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
         )}
 
         {/* Benefit Overlays - Only show in Proposed view */}
-        {systemView === 'proposed' && activeFilter && BENEFIT_METRICS[activeFilter] && (
+        {systemView === 'proposed' && activeFilter && BENEFIT_METRICS[activeFilter] && componentPositions.size >= 5 && (
           <>
             {BENEFIT_METRICS[activeFilter].map((metric, idx) => {
             const componentRect = componentPositions.get(metric.component);
