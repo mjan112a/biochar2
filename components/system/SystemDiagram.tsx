@@ -5,7 +5,7 @@
 
 'use client';
 
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import { useSystemView } from '@/hooks/useSystemView';
@@ -16,23 +16,13 @@ interface ComponentBoxProps {
   name: string;
   position: { top?: string; bottom?: string; left?: string; right?: string };
   subtitle?: string;
-  onPositionMeasured?: (id: ComponentName, rect: DOMRect) => void;
 }
 
-function ComponentBox({ id, name, position, subtitle, onPositionMeasured }: ComponentBoxProps) {
+function ComponentBox({ id, name, position, subtitle }: ComponentBoxProps) {
   const router = useRouter();
-  const boxRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (boxRef.current && onPositionMeasured) {
-      const rect = boxRef.current.getBoundingClientRect();
-      onPositionMeasured(id, rect);
-    }
-  }, [id, onPositionMeasured]);
 
   return (
     <div
-      ref={boxRef}
       data-component-id={id}
       onClick={() => router.push(`/${id}`)}
       className="absolute cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-xl"
@@ -53,28 +43,26 @@ function ComponentBox({ id, name, position, subtitle, onPositionMeasured }: Comp
   );
 }
 
-interface BenefitMetric {
-  component: ComponentName;
+interface BenefitBadge {
   metric: string;
-  offsetX?: number; // Offset from component in pixels
-  offsetY?: number;
+  position: { top?: string; bottom?: string; left?: string; right?: string };
 }
 
-const BENEFIT_METRICS: Record<string, BenefitMetric[]> = {
+const BENEFIT_BADGES: Record<string, BenefitBadge[]> = {
   economic: [
-    { component: 'pyrolysis-unit', metric: '$250-500/ton CO₂ credits', offsetX: 10, offsetY: -10 },
-    { component: 'anaerobic-digester', metric: '$6-12/MMBTU RNG', offsetX: 10, offsetY: 0 },
-    { component: 'farm-waterways', metric: '$800/ton USDA grants', offsetX: 10, offsetY: 0 },
+    { metric: '$250-500/ton CO₂ credits', position: { top: '3%', right: '22%' } },
+    { metric: '$6-12/MMBTU RNG', position: { top: '35%', left: '53%' } },
+    { metric: '$800/ton USDA grants', position: { bottom: '12%', right: '22%' } },
   ],
   environmental: [
-    { component: 'chicken-house', metric: '90% ammonia reduction', offsetX: 10, offsetY: 0 },
-    { component: 'pyrolysis-unit', metric: '2.5 tonnes CO₂-eq', offsetX: 10, offsetY: -10 },
-    { component: 'farm-waterways', metric: '95% P, 70% N recovery', offsetX: 10, offsetY: 0 },
+    { metric: '90% ammonia reduction', position: { top: '10%', left: '23%' } },
+    { metric: '2.5 tonnes CO₂-eq', position: { top: '1%', right: '22%' } },
+    { metric: '95% P, 70% N recovery', position: { bottom: '14%', right: '22%' } },
   ],
   reuse: [
-    { component: 'anaerobic-digester', metric: '100% energy self-sufficient', offsetX: 10, offsetY: 0 },
-    { component: 'pyrolysis-unit', metric: 'Biochar soil amendment', offsetX: 10, offsetY: -10 },
-    { component: 'farm-waterways', metric: 'Zero fertilizer runoff', offsetX: 10, offsetY: 0 },
+    { metric: '100% energy self-sufficient', position: { top: '33%', left: '53%' } },
+    { metric: 'Biochar soil amendment', position: { top: '5%', right: '22%' } },
+    { metric: 'Zero fertilizer runoff', position: { bottom: '16%', right: '22%' } },
   ],
 };
 
@@ -84,27 +72,7 @@ interface SystemDiagramProps {
 
 export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
   const { systemView } = useSystemView();
-  const [componentPositions, setComponentPositions] = useState<Map<ComponentName, DOMRect>>(new Map());
   const diagramRef = useRef<HTMLDivElement>(null);
-
-  const handlePositionMeasured = useCallback((id: ComponentName, rect: DOMRect) => {
-    setComponentPositions(prev => {
-      const newMap = new Map(prev);
-      newMap.set(id, rect);
-      return newMap;
-    });
-  }, []);
-
-  // Re-measure on resize
-  useEffect(() => {
-    const handleResize = () => {
-      // Trigger re-measurement by clearing positions
-      setComponentPositions(new Map());
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className="relative bg-white rounded-2xl shadow-lg p-8" style={{ minHeight: '600px' }}>
@@ -179,7 +147,6 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               name="Chicken Houses"
               position={{ top: '5%', left: '5%' }}
               subtitle="Manure, Pine Shavings, Dead Chickens"
-              onPositionMeasured={handlePositionMeasured}
             />
 
             {/* Processing Plant */}
@@ -188,7 +155,6 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               name="Chicken Processing Plant"
               position={{ bottom: '5%', left: '5%' }}
               subtitle="Processing Waste, Offal"
-              onPositionMeasured={handlePositionMeasured}
             />
 
             {/* Anaerobic Digester */}
@@ -196,7 +162,6 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               id="anaerobic-digester"
               name="Anaerobic Digester (AD)"
               position={{ top: '30%', left: '35%' }}
-              onPositionMeasured={handlePositionMeasured}
             />
 
             {/* Pyrolysis Unit */}
@@ -204,7 +169,6 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               id="pyrolysis-unit"
               name="Pyrolysis"
               position={{ top: '5%', right: '10%' }}
-              onPositionMeasured={handlePositionMeasured}
             />
 
             {/* Farm/Waterways */}
@@ -213,7 +177,6 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               name="Farmland, Rivers & Lakes"
               position={{ bottom: '10%', right: '10%' }}
               subtitle="Digestate Liquid"
-              onPositionMeasured={handlePositionMeasured}
             />
 
             {/* Emission Reduction Indicator */}
@@ -297,25 +260,13 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
         )}
 
         {/* Benefit Overlays - Only show in Proposed view */}
-        {systemView === 'proposed' && activeFilter && BENEFIT_METRICS[activeFilter] && componentPositions.size >= 5 && (
+        {systemView === 'proposed' && activeFilter && BENEFIT_BADGES[activeFilter] && (
           <>
-            {BENEFIT_METRICS[activeFilter].map((metric, idx) => {
-            const componentRect = componentPositions.get(metric.component);
-            if (!componentRect || !diagramRef.current) return null;
-
-            const diagramRect = diagramRef.current.getBoundingClientRect();
-            const relativeX = componentRect.left - diagramRect.left + componentRect.width + (metric.offsetX || 0);
-            const relativeY = componentRect.top - diagramRect.top + componentRect.height / 2 + (metric.offsetY || 0);
-
-            return (
+            {BENEFIT_BADGES[activeFilter].map((badge, idx) => (
               <div
                 key={idx}
                 className="absolute animate-fade-in"
-                style={{
-                  left: `${relativeX}px`,
-                  top: `${relativeY}px`,
-                  transform: 'translateY(-50%)',
-                }}
+                style={badge.position}
               >
                 <div className={`
                   px-3 py-2 rounded-lg shadow-lg border-2 text-sm font-semibold whitespace-nowrap
@@ -329,12 +280,11 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
                       {activeFilter === 'environmental' ? '🌱' : ''}
                       {activeFilter === 'reuse' ? '♻️' : ''}
                     </span>
-                    <span>{metric.metric}</span>
+                    <span>{badge.metric}</span>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            ))}
           </>
         )}
       </div>
