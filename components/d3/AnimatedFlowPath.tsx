@@ -39,7 +39,6 @@ export function AnimatedFlowPath({
     if (!svgRef.current || !pathRef.current) return;
 
     const svg = d3.select(svgRef.current);
-    const path = d3.select(pathRef.current);
 
     // Get path element for calculations
     const pathNode = pathRef.current;

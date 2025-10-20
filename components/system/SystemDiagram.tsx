@@ -12,6 +12,7 @@ import { useSystemView } from '@/hooks/useSystemView';
 import { ComponentName } from '@/types';
 import { AnimatedFlowPath } from '@/components/d3/AnimatedFlowPath';
 import { AnimatedCounter } from '@/components/d3/AnimatedCounter';
+import { AnimatedTruck } from '@/components/d3/AnimatedTruck';
 
 interface ComponentBoxProps {
   id: ComponentName;
@@ -95,61 +96,244 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
       </h2>
 
       <div ref={diagramRef} className="relative" style={{ height: '500px' }}>
-        {/* Current Practice View - Simple Linear Flow */}
+        {/* Current Practice View - Complete System */}
         {systemView === 'current' ? (
           <>
-            {/* Chicken Houses */}
+            {/* Chicken House */}
             <ComponentBox
               id="chicken-house"
-              name="Chicken Houses"
-              position={{ top: '20%', left: '5%' }}
-              subtitle="Manure, Pine Shavings, Dead Chickens"
+              name="Chicken House"
+              position={{ top: '35%', left: '5%' }}
             />
 
             {/* Processing Plant */}
             <ComponentBox
               id="processing-plant"
-              name="Chicken Processing Plant"
-              position={{ top: '55%', left: '5%' }}
-              subtitle="Processing Waste, Offal"
+              name="Processing Plant"
+              position={{ top: '5%', left: '38%' }}
             />
 
-            {/* Farm/Waterways */}
-            <ComponentBox
-              id="farm-waterways"
-              name="Farmland, Rivers & Lakes"
-              position={{ bottom: '10%', right: '10%' }}
+            {/* Farm Land Application */}
+            <div className="absolute cursor-pointer" style={{ bottom: '15%', left: '30%' }}>
+              <div className="border-2 border-dashed border-gray-400 bg-white rounded-lg p-4 w-48 text-center shadow-md animate-slide-fade-in">
+                <h3 className="font-bold text-sm text-gray-900">Farm Land Application</h3>
+                <p className="text-xs text-gray-600 mt-1">Crops & Livestock</p>
+              </div>
+            </div>
+
+            {/* Rivers/Waterways (pollution indicator) */}
+            <div className="absolute" style={{ bottom: '10%', right: '8%' }}>
+              <div className="border-2 border-red-400 bg-red-50 rounded-lg p-3 w-44 text-center shadow-md animate-slide-fade-in">
+                <h3 className="font-bold text-sm text-red-800">Rivers & Waterways</h3>
+                <p className="text-xs text-red-600 mt-1">💧 Fertilizer & Timber Losses</p>
+              </div>
+            </div>
+
+            {/* GHG Emissions indicator (from Processing Plant) */}
+            <div className="absolute animate-slide-fade-in" style={{ top: '1%', left: '41%' }}>
+              <div className="bg-red-100 border-2 border-red-400 rounded-lg px-3 py-2 shadow">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🏭</span>
+                  <div>
+                    <p className="text-xs font-semibold text-red-800">GHG Emissions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FOG to Landfill indicator */}
+            <div className="absolute animate-slide-fade-in" style={{ top: '15%', right: '15%' }}>
+              <div className="bg-amber-100 border-2 border-amber-400 rounded-lg px-3 py-2 shadow">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🗑️</span>
+                  <div>
+                    <p className="text-xs font-semibold text-amber-800">FOG → Landfill</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Animated Flow Paths for Current Practice */}
+            
+            {/* Fresh Pine Shavings to Chicken House */}
+            <AnimatedFlowPath
+              id="pine-to-chicken"
+              startX="2"
+              startY="30"
+              endX="10"
+              endY="38"
+              color="#A67C52"
+              particleColor="#D4A373"
+              particleCount={2}
+              duration={3000}
             />
 
-            {/* Simple arrows for current practice */}
-            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
-              <defs>
-                <marker
-                  id="arrow-current"
-                  markerWidth="10"
-                  markerHeight="7"
-                  refX="9"
-                  refY="3.5"
-                  orient="auto"
-                >
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
-                </marker>
-              </defs>
-              
-              {/* Chicken Houses to Farm */}
-              <line x1="20%" y1="30%" x2="62%" y2="80%" stroke="#DC2626" strokeWidth="2" markerEnd="url(#arrow-current)" />
-              
-              {/* Processing Plant to Farm */}
-              <line x1="20%" y1="60%" x2="62%" y2="82%" stroke="#DC2626" strokeWidth="2" markerEnd="url(#arrow-current)" />
-            </svg>
+            {/* Chicken Feed to Chicken House */}
+            <AnimatedFlowPath
+              id="feed-to-chicken"
+              startX="2"
+              startY="50"
+              endX="10"
+              endY="45"
+              color="#8B7355"
+              particleColor="#A0826D"
+              particleCount={2}
+              duration={3200}
+            />
+
+            {/* Chickens to Processing Plant - Using Truck */}
+            <AnimatedTruck
+              id="chickens-to-processing"
+              startX="20"
+              startY="40"
+              endX="38"
+              endY="15"
+              duration={4000}
+            />
+
+            {/* Processing Plant to Meat (output right) */}
+            <AnimatedFlowPath
+              id="processing-to-meat"
+              startX="58"
+              startY="12"
+              endX="70"
+              endY="12"
+              color="#059669"
+              particleColor="#10B981"
+              particleCount={2}
+              duration={2800}
+            />
+
+            {/* Fossil Fuels & Electricity to Processing Plant */}
+            <AnimatedFlowPath
+              id="energy-to-processing"
+              startX="48"
+              startY="25"
+              endX="48"
+              endY="18"
+              color="#F59E0B"
+              particleColor="#FBBF24"
+              particleCount={3}
+              duration={2500}
+            />
+
+            {/* Dead Chickens from Chicken House */}
+            <AnimatedFlowPath
+              id="dead-chickens"
+              startX="20"
+              startY="48"
+              endX="28"
+              endY="52"
+              color="#7C2D12"
+              particleColor="#991B1B"
+              particleCount={1}
+              duration={4000}
+            />
+
+            {/* Used Poultry Litter to Farm */}
+            <AnimatedFlowPath
+              id="litter-to-farm"
+              startX="18"
+              startY="48"
+              endX="35"
+              endY="72"
+              color="#DC2626"
+              particleColor="#EF4444"
+              particleCount={4}
+              duration={3800}
+            />
+
+            {/* Chemical Fertilizers to Farm */}
+            <AnimatedFlowPath
+              id="fertilizers-to-farm"
+              startX="25"
+              startY="80"
+              endX="35"
+              endY="78"
+              color="#9333EA"
+              particleColor="#A855F7"
+              particleCount={2}
+              duration={3000}
+            />
+
+            {/* Farm to Crops (output) */}
+            <AnimatedFlowPath
+              id="farm-to-crops"
+              startX="48"
+              startY="75"
+              endX="10"
+              endY="72"
+              color="#059669"
+              particleColor="#10B981"
+              particleCount={2}
+              duration={3500}
+            />
+
+            {/* Water & GHG Emissions & Nitrogen Losses from Farm */}
+            <AnimatedFlowPath
+              id="farm-emissions"
+              startX="45"
+              startY="82"
+              endX="45"
+              endY="90"
+              color="#DC2626"
+              particleColor="#EF4444"
+              particleCount={3}
+              duration={3000}
+            />
+
+            {/* Fertilizer Runoff to Rivers */}
+            <AnimatedFlowPath
+              id="runoff-to-rivers"
+              startX="52"
+              startY="80"
+              endX="68"
+              endY="85"
+              color="#DC2626"
+              particleColor="#EF4444"
+              particleCount={4}
+              duration={4000}
+            />
 
             {/* Flow Labels */}
-            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ top: '52%', left: '35%' }}>
-              Litter to Land
+            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '27%', left: '1%' }}>
+              Fresh Pine<br/>Shavings
             </div>
             
-            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ top: '68%', left: '35%' }}>
-              Waste to Land
+            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '47%', left: '0%' }}>
+              Chicken<br/>Feed
+            </div>
+            
+            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '25%', left: '24%' }}>
+              Chickens
+            </div>
+            
+            <div className="absolute text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded shadow" style={{ top: '8%', right: '24%' }}>
+              Meat
+            </div>
+            
+            <div className="absolute text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded shadow" style={{ top: '23%', left: '44%' }}>
+              Fossil Fuels<br/>& Electricity
+            </div>
+            
+            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ top: '50%', left: '22%' }}>
+              Dead<br/>Chickens
+            </div>
+            
+            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow font-semibold" style={{ top: '58%', left: '22%' }}>
+              Used Poultry<br/>Litter
+            </div>
+            
+            <div className="absolute text-xs font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded shadow" style={{ bottom: '25%', left: '22%' }}>
+              Chemical<br/>Fertilizers
+            </div>
+            
+            <div className="absolute text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded shadow" style={{ bottom: '24%', left: '8%' }}>
+              Crops
+            </div>
+            
+            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ bottom: '8%', left: '40%' }}>
+              Water & GHG<br/>Emissions &<br/>Nitrogen Losses
             </div>
           </>
         ) : (

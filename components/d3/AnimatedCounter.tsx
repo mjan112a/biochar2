@@ -26,8 +26,11 @@ export function AnimatedCounter({ value, duration = 1500 }: AnimatedCounterProps
     const prefix = value.substring(0, numMatch.index);
     const suffix = value.substring((numMatch.index || 0) + numMatch[0].length);
 
+    // Store ref in variable for cleanup
+    const span = spanRef.current;
+
     // Animate the number
-    d3.select(spanRef.current)
+    d3.select(span)
       .transition()
       .duration(duration)
       .ease(d3.easeQuadOut)
@@ -40,7 +43,7 @@ export function AnimatedCounter({ value, duration = 1500 }: AnimatedCounterProps
       });
 
     return () => {
-      d3.select(spanRef.current).interrupt();
+      d3.select(span).interrupt();
     };
   }, [value, duration]);
 
