@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import { useSystemView } from '@/hooks/useSystemView';
 import { ComponentName } from '@/types';
+import { AnimatedFlowPath } from '@/components/d3/AnimatedFlowPath';
+import { AnimatedCounter } from '@/components/d3/AnimatedCounter';
 
 interface ComponentBoxProps {
   id: ComponentName;
@@ -20,17 +22,29 @@ interface ComponentBoxProps {
 
 function ComponentBox({ id, name, position, subtitle }: ComponentBoxProps) {
   const router = useRouter();
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <div
       data-component-id={id}
       onClick={() => router.push(`/${id}`)}
-      className="absolute cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-xl"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="absolute cursor-pointer transition-all duration-300 hover:scale-110 hover:z-10 animate-slide-fade-in"
       style={position}
     >
-      <div className="border-2 border-dashed border-gray-400 bg-white rounded-lg p-4 w-40 text-center shadow-md">
+      <div 
+        className={`
+          border-2 border-dashed bg-white rounded-lg p-4 w-40 text-center
+          transition-all duration-300
+          ${isHovered 
+            ? 'border-blue-500 shadow-2xl shadow-blue-500/50 animate-pulse-glow' 
+            : 'border-gray-400 shadow-md'
+          }
+        `}
+      >
         <div className="flex flex-col items-center gap-2">
-          <Icon name={id} size="lg" className="text-gray-700" />
+          <Icon name={id} size="lg" className={`transition-colors duration-300 ${isHovered ? 'text-blue-600' : 'text-gray-700'}`} />
           <div>
             <h3 className="font-bold text-sm text-gray-900">{name}</h3>
             {subtitle && (
@@ -190,40 +204,86 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               </div>
             </div>
 
-            {/* Flow Arrows - Proposed System */}
-            {/* Chicken House to AD */}
-            <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
-              <defs>
-                <marker
-                  id="arrow"
-                  markerWidth="10"
-                  markerHeight="7"
-                  refX="9"
-                  refY="3.5"
-                  orient="auto"
-                >
-                  <polygon points="0 0, 10 3.5, 0 7" fill="#374151" />
-                </marker>
-              </defs>
-              
-              {/* Chicken to AD */}
-              <line x1="25%" y1="18%" x2="40%" y2="35%" stroke="#374151" strokeWidth="2" markerEnd="url(#arrow)" />
-              
-              {/* Chicken to Pyrolysis */}
-              <line x1="30%" y1="12%" x2="62%" y2="12%" stroke="#374151" strokeWidth="2" markerEnd="url(#arrow)" />
-              
-              {/* Processing to AD */}
-              <line x1="25%" y1="82%" x2="40%" y2="52%" stroke="#374151" strokeWidth="2" markerEnd="url(#arrow)" />
-              
-              {/* AD to Pyrolysis */}
-              <line x1="52%" y1="35%" x2="62%" y2="20%" stroke="#374151" strokeWidth="2" markerEnd="url(#arrow)" />
-              
-              {/* Pyrolysis to Farm (Biochar) */}
-              <line x1="75%" y1="20%" x2="75%" y2="75%" stroke="#8E44AD" strokeWidth="3" markerEnd="url(#arrow)" />
-              
-              {/* AD to Farm (Digestate) */}
-              <line x1="52%" y1="48%" x2="62%" y2="80%" stroke="#3498DB" strokeWidth="2" markerEnd="url(#arrow)" />
-            </svg>
+            {/* Animated Flow Paths - Proposed System */}
+            
+            {/* Chicken to AD - Brown particles for manure/litter */}
+            <AnimatedFlowPath
+              id="chicken-to-ad"
+              startX="25"
+              startY="18"
+              endX="40"
+              endY="35"
+              color="#A67C52"
+              particleColor="#8B4513"
+              particleCount={4}
+              duration={4000}
+            />
+            
+            {/* Chicken to Pyrolysis - Brown particles for fresh litter */}
+            <AnimatedFlowPath
+              id="chicken-to-pyrolysis"
+              startX="30"
+              startY="12"
+              endX="62"
+              endY="12"
+              color="#A67C52"
+              particleColor="#8B4513"
+              particleCount={3}
+              duration={3500}
+            />
+            
+            {/* Processing to AD - Red particles for waste */}
+            <AnimatedFlowPath
+              id="processing-to-ad"
+              startX="25"
+              startY="82"
+              endX="40"
+              endY="52"
+              color="#DC2626"
+              particleColor="#EF4444"
+              particleCount={3}
+              duration={3800}
+            />
+            
+            {/* AD to Pyrolysis - Orange particles for syngas */}
+            <AnimatedFlowPath
+              id="ad-to-pyrolysis"
+              startX="52"
+              startY="35"
+              endX="62"
+              endY="20"
+              color="#F97316"
+              particleColor="#FB923C"
+              particleCount={5}
+              duration={2500}
+            />
+            
+            {/* Pyrolysis to Farm - Purple particles for biochar */}
+            <AnimatedFlowPath
+              id="pyrolysis-to-farm"
+              startX="75"
+              startY="20"
+              endX="75"
+              endY="75"
+              color="#8E44AD"
+              particleColor="#A855F7"
+              particleCount={4}
+              duration={4500}
+              strokeWidth={3}
+            />
+            
+            {/* AD to Farm - Blue particles for digestate */}
+            <AnimatedFlowPath
+              id="ad-to-farm"
+              startX="52"
+              startY="48"
+              endX="62"
+              endY="80"
+              color="#3498DB"
+              particleColor="#60A5FA"
+              particleCount={3}
+              duration={4000}
+            />
 
             {/* Flow Labels */}
             <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '26%', left: '30%' }}>
@@ -280,7 +340,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
                       {activeFilter === 'environmental' ? '🌱' : ''}
                       {activeFilter === 'reuse' ? '♻️' : ''}
                     </span>
-                    <span>{badge.metric}</span>
+                    <AnimatedCounter value={badge.metric} />
                   </div>
                 </div>
               </div>
