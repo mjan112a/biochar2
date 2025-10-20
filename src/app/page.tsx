@@ -33,7 +33,7 @@ export default function HomePage() {
               />
               <div className="h-8 w-px bg-gray-300" />
               <h1 className="text-xl font-bold text-gray-900">
-                Poultry Biochar Circularity System
+                Poultry Biochar Circular Economy
               </h1>
             </div>
             <ToggleSwitch />
