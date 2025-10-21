@@ -13,6 +13,7 @@ import { ComponentName } from '@/types';
 import { AnimatedFlowPath } from '@/components/d3/AnimatedFlowPath';
 import { AnimatedCounter } from '@/components/d3/AnimatedCounter';
 import { AnimatedTruck } from '@/components/d3/AnimatedTruck';
+import { AnimatedIcon } from '@/components/d3/AnimatedIcon';
 
 interface ComponentBoxProps {
   id: ComponentName;
@@ -90,42 +91,42 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
   const diagramRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative bg-white rounded-2xl shadow-lg p-8" style={{ minHeight: '600px' }}>
+    <div className="relative bg-white rounded-2xl shadow-lg p-8" style={{ minHeight: '700px' }}>
       <h2 className="text-2xl font-bold mb-8 text-center text-gray-900">
         System Flow Diagram
       </h2>
 
-      <div ref={diagramRef} className="relative" style={{ height: '500px' }}>
-        {/* Current Practice View - Complete System */}
+      <div ref={diagramRef} className="relative" style={{ height: '600px' }}>
+        {/* Current Practice View - Vertical Layout */}
         {systemView === 'current' ? (
           <>
-            {/* Chicken House */}
-            <ComponentBox
-              id="chicken-house"
-              name="Chicken House"
-              position={{ top: '35%', left: '5%' }}
-            />
-
-            {/* Processing Plant */}
+            {/* Processing Plant - TOP CENTER */}
             <ComponentBox
               id="processing-plant"
               name="Processing Plant"
-              position={{ top: '5%', left: '38%' }}
+              position={{ top: '8%', left: '42%' }}
             />
 
-            {/* Farm Land Application */}
-            <div className="absolute cursor-pointer" style={{ bottom: '15%', left: '30%' }}>
+            {/* Chicken House - LEFT MIDDLE */}
+            <ComponentBox
+              id="chicken-house"
+              name="Chicken House"
+              position={{ top: '42%', left: '8%' }}
+            />
+
+            {/* Farm Land Application - BOTTOM CENTER */}
+            <div className="absolute cursor-pointer" style={{ bottom: '12%', left: '38%' }}>
               <div className="border-2 border-dashed border-gray-400 bg-white rounded-lg p-4 w-48 text-center shadow-md animate-slide-fade-in">
                 <h3 className="font-bold text-sm text-gray-900">Farm Land Application</h3>
                 <p className="text-xs text-gray-600 mt-1">Crops & Livestock</p>
               </div>
             </div>
 
-            {/* Rivers/Waterways (pollution indicator) */}
-            <div className="absolute" style={{ bottom: '10%', right: '8%' }}>
+            {/* Rivers/Waterways - BOTTOM RIGHT (pollution indicator) */}
+            <div className="absolute" style={{ bottom: '12%', right: '8%' }}>
               <div className="border-2 border-red-400 bg-red-50 rounded-lg p-3 w-44 text-center shadow-md animate-slide-fade-in">
                 <h3 className="font-bold text-sm text-red-800">Rivers & Waterways</h3>
-                <p className="text-xs text-red-600 mt-1">💧 Fertilizer & Timber Losses</p>
+                <p className="text-xs text-red-600 mt-1">💧 Nutrient Pollution</p>
               </div>
             </div>
 
@@ -153,352 +154,490 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               </div>
             </div>
 
-            {/* Animated Flow Paths for Current Practice */}
+            {/* Animated Flow Paths - Current Practice (Vertical Layout) */}
             
             {/* Fresh Pine Shavings to Chicken House */}
-            <AnimatedFlowPath
+            <AnimatedIcon
               id="pine-to-chicken"
               startX="2"
-              startY="30"
-              endX="10"
-              endY="38"
-              color="#A67C52"
-              particleColor="#D4A373"
-              particleCount={2}
+              startY="38"
+              endX="8"
+              endY="45"
+              iconPath="/images/flow-icons/pine-shavings.svg"
+              iconSize={35}
               duration={3000}
+              label="Pine Shavings"
+              labelColor="gray"
+              tooltipData={{
+                title: "PINE SHAVINGS (INPUT)",
+                metrics: [
+                  { label: "Cost per Ton", value: "$150-250", icon: "💵" },
+                  { label: "Supply Distance", value: "100-300 miles", icon: "🚚" },
+                  { label: "Replacement Frequency", value: "Every 60 days", icon: "📅" },
+                  { label: "Annual Cost", value: "$75,000-125,000", icon: "💰" }
+                ],
+                highlights: [
+                  "🌲 External resource dependency",
+                  "🚚 High transportation costs",
+                  "📈 Price volatility & supply risk"
+                ]
+              }}
             />
 
             {/* Chicken Feed to Chicken House */}
-            <AnimatedFlowPath
+            <AnimatedIcon
               id="feed-to-chicken"
               startX="2"
-              startY="50"
-              endX="10"
-              endY="45"
-              color="#8B7355"
-              particleColor="#A0826D"
-              particleCount={2}
+              startY="52"
+              endX="8"
+              endY="50"
+              iconPath="/images/flow-icons/chicken-feed.svg"
+              iconSize={35}
               duration={3200}
+              label="Chicken Feed"
+              labelColor="gray"
+              tooltipData={{
+                title: "CHICKEN FEED (INPUT)",
+                metrics: [
+                  { label: "Cost per Ton", value: "$400-600", icon: "💵" },
+                  { label: "Feed Conversion", value: "1.8:1 ratio", icon: "📊" },
+                  { label: "NPK Content", value: "18-20-10", icon: "🌾" },
+                  { label: "Annual Cost", value: "$2M-3M", icon: "💰" }
+                ],
+                highlights: [
+                  "💰 Major operational expense",
+                  "📈 Commodity price fluctuation",
+                  "🌾 High nutritional requirements"
+                ]
+              }}
             />
 
-            {/* Chickens to Processing Plant - Using Truck */}
+            {/* Chickens to Processing Plant - Truck going UP */}
             <AnimatedTruck
               id="chickens-to-processing"
-              startX="20"
-              startY="40"
-              endX="38"
-              endY="15"
+              startX="18"
+              startY="42"
+              endX="42"
+              endY="20"
               duration={4000}
             />
 
             {/* Processing Plant to Meat (output right) */}
-            <AnimatedFlowPath
+            <AnimatedIcon
               id="processing-to-meat"
               startX="58"
               startY="12"
-              endX="70"
+              endX="72"
               endY="12"
-              color="#059669"
-              particleColor="#10B981"
-              particleCount={2}
+              iconPath="/images/flow-icons/meat.svg"
+              iconSize={35}
               duration={2800}
+              label="Meat"
+              labelColor="green"
+              tooltipData={{
+                title: "MEAT OUTPUT (REVENUE)",
+                metrics: [
+                  { label: "Market Value", value: "$1.50-2.50/lb", icon: "💵" },
+                  { label: "Annual Production", value: "5-10M lbs", icon: "📦" },
+                  { label: "Processing Yield", value: "72-75%", icon: "📊" },
+                  { label: "Revenue Stream", value: "$10-25M/year", icon: "💰" }
+                ],
+                highlights: [
+                  "🥇 Primary revenue source",
+                  "📈 Consistent market demand",
+                  "⭐ Quality standards critical"
+                ]
+              }}
             />
 
-            {/* Fossil Fuels & Electricity to Processing Plant */}
-            <AnimatedFlowPath
+            {/* Fossil Fuels & Electricity to Processing Plant (from below) */}
+            <AnimatedIcon
               id="energy-to-processing"
-              startX="48"
+              startX="47"
               startY="25"
-              endX="48"
-              endY="18"
-              color="#F59E0B"
-              particleColor="#FBBF24"
-              particleCount={3}
+              endX="47"
+              endY="20"
+              iconPath="/images/flow-icons/fossil-fuel.svg"
+              iconSize={35}
               duration={2500}
+              label="Fossil Fuels"
+              labelColor="amber"
+              tooltipData={{
+                title: "FOSSIL FUELS (PROBLEM)",
+                metrics: [
+                  { label: "Cost per MMBTU", value: "$8-15", icon: "💵" },
+                  { label: "CO₂ Emissions", value: "117 lbs/MMBTU", icon: "🏭" },
+                  { label: "Grid Dependency", value: "100%", icon: "⚡" },
+                  { label: "Annual Energy Cost", value: "$500K-1M", icon: "💰" }
+                ],
+                highlights: [
+                  "🌍 High carbon footprint",
+                  "📈 Rising energy costs",
+                  "⚠️ Supply chain vulnerability"
+                ]
+              }}
             />
 
-            {/* Dead Chickens from Chicken House */}
+            {/* Dead Chickens from Chicken House (downward) */}
             <AnimatedFlowPath
               id="dead-chickens"
-              startX="20"
-              startY="48"
-              endX="28"
-              endY="52"
+              startX="18"
+              startY="55"
+              endX="22"
+              endY="65"
               color="#7C2D12"
               particleColor="#991B1B"
               particleCount={1}
               duration={4000}
             />
 
-            {/* Used Poultry Litter to Farm */}
-            <AnimatedFlowPath
+            {/* Used Poultry Litter to Farm (downward) */}
+            <AnimatedIcon
               id="litter-to-farm"
-              startX="18"
-              startY="48"
-              endX="35"
-              endY="72"
-              color="#DC2626"
-              particleColor="#EF4444"
-              particleCount={4}
+              startX="15"
+              startY="55"
+              endX="40"
+              endY="75"
+              iconPath="/images/flow-icons/litter.svg"
+              iconSize={35}
               duration={3800}
+              label="Used Litter"
+              labelColor="red"
+              tooltipData={{
+                title: "USED LITTER (POLLUTION)",
+                metrics: [
+                  { label: "Ammonia Content", value: "90% higher vs Proposed", icon: "💨" },
+                  { label: "N₂O Emissions", value: "54-97% more", icon: "🏭" },
+                  { label: "Disposal Cost", value: "$20-40/ton", icon: "💵" },
+                  { label: "Environmental Impact", value: "High", icon: "⚠️" }
+                ],
+                highlights: [
+                  "🌍 Major pollutant source",
+                  "💰 Expensive disposal required",
+                  "🌊 Water contamination risk"
+                ]
+              }}
             />
 
-            {/* Chemical Fertilizers to Farm */}
-            <AnimatedFlowPath
+            {/* Chemical Fertilizers to Farm (from left) */}
+            <AnimatedIcon
               id="fertilizers-to-farm"
               startX="25"
-              startY="80"
-              endX="35"
-              endY="78"
-              color="#9333EA"
-              particleColor="#A855F7"
-              particleCount={2}
+              startY="82"
+              endX="38"
+              endY="82"
+              iconPath="/images/flow-icons/fertilizer.svg"
+              iconSize={35}
               duration={3000}
+              label="Fertilizers"
+              labelColor="purple"
+              tooltipData={{
+                title: "CHEMICAL FERTILIZERS",
+                metrics: [
+                  { label: "Cost per Ton", value: "$600-1,200", icon: "💵" },
+                  { label: "NPK Content", value: "10-10-10 typical", icon: "🧪" },
+                  { label: "Runoff Pollution", value: "30-50%", icon: "🌊" },
+                  { label: "Soil Degradation", value: "Long-term", icon: "⚠️" }
+                ],
+                highlights: [
+                  "💰 Expensive recurring cost",
+                  "🌊 Causes water pollution",
+                  "🌍 Depletes soil health over time"
+                ]
+              }}
             />
 
-            {/* Farm to Crops (output) */}
+            {/* Farm to Crops (output left) */}
             <AnimatedFlowPath
               id="farm-to-crops"
-              startX="48"
-              startY="75"
+              startX="38"
+              startY="78"
               endX="10"
-              endY="72"
+              endY="78"
               color="#059669"
               particleColor="#10B981"
               particleCount={2}
               duration={3500}
             />
 
-            {/* Water & GHG Emissions & Nitrogen Losses from Farm */}
+            {/* Water & GHG Emissions from Farm (downward) */}
             <AnimatedFlowPath
               id="farm-emissions"
-              startX="45"
-              startY="82"
-              endX="45"
-              endY="90"
+              startX="48"
+              startY="85"
+              endX="48"
+              endY="95"
               color="#DC2626"
               particleColor="#EF4444"
               particleCount={3}
               duration={3000}
             />
 
-            {/* Fertilizer Runoff to Rivers */}
+            {/* Fertilizer Runoff to Rivers (right) */}
             <AnimatedFlowPath
               id="runoff-to-rivers"
-              startX="52"
-              startY="80"
-              endX="68"
-              endY="85"
+              startX="58"
+              startY="82"
+              endX="73"
+              endY="82"
               color="#DC2626"
               particleColor="#EF4444"
               particleCount={4}
               duration={4000}
             />
-
-            {/* Flow Labels */}
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '27%', left: '1%' }}>
-              Fresh Pine<br/>Shavings
-            </div>
-            
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '47%', left: '0%' }}>
-              Chicken<br/>Feed
-            </div>
-            
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '25%', left: '24%' }}>
-              Chickens
-            </div>
-            
-            <div className="absolute text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded shadow" style={{ top: '8%', right: '24%' }}>
-              Meat
-            </div>
-            
-            <div className="absolute text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded shadow" style={{ top: '23%', left: '44%' }}>
-              Fossil Fuels<br/>& Electricity
-            </div>
-            
-            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ top: '50%', left: '22%' }}>
-              Dead<br/>Chickens
-            </div>
-            
-            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow font-semibold" style={{ top: '58%', left: '22%' }}>
-              Used Poultry<br/>Litter
-            </div>
-            
-            <div className="absolute text-xs font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded shadow" style={{ bottom: '25%', left: '22%' }}>
-              Chemical<br/>Fertilizers
-            </div>
-            
-            <div className="absolute text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded shadow" style={{ bottom: '24%', left: '8%' }}>
-              Crops
-            </div>
-            
-            <div className="absolute text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded shadow" style={{ bottom: '8%', left: '40%' }}>
-              Water & GHG<br/>Emissions &<br/>Nitrogen Losses
-            </div>
           </>
         ) : (
-          /* Proposed System View - Full Circular Flow */
+          /* Proposed System View - Improved Spacing */
           <>
-            {/* Chicken Houses */}
-            <ComponentBox
-              id="chicken-house"
-              name="Chicken Houses"
-              position={{ top: '5%', left: '5%' }}
-              subtitle="Manure, Pine Shavings, Dead Chickens"
-            />
-
-            {/* Processing Plant */}
+            {/* Processing Plant - TOP CENTER */}
             <ComponentBox
               id="processing-plant"
-              name="Chicken Processing Plant"
-              position={{ bottom: '5%', left: '5%' }}
-              subtitle="Processing Waste, Offal"
+              name="Processing Plant"
+              position={{ top: '5%', left: '40%' }}
             />
 
-            {/* Anaerobic Digester */}
+            {/* Chicken House - LEFT MIDDLE (more left) */}
+            <ComponentBox
+              id="chicken-house"
+              name="Chicken House"
+              position={{ top: '42%', left: '5%' }}
+            />
+
+            {/* Anaerobic Digester - CENTER (more space from others) */}
             <ComponentBox
               id="anaerobic-digester"
               name="Anaerobic Digester (AD)"
-              position={{ top: '30%', left: '35%' }}
+              position={{ top: '42%', left: '40%' }}
             />
 
-            {/* Pyrolysis Unit */}
+            {/* Pyrolysis Unit - TOP RIGHT (more space) */}
             <ComponentBox
               id="pyrolysis-unit"
               name="Pyrolysis"
-              position={{ top: '5%', right: '10%' }}
+              position={{ top: '5%', right: '5%' }}
             />
 
-            {/* Farm/Waterways */}
+            {/* Farm/Waterways - BOTTOM CENTER */}
             <ComponentBox
               id="farm-waterways"
               name="Farmland, Rivers & Lakes"
-              position={{ bottom: '10%', right: '10%' }}
-              subtitle="Digestate Liquid"
+              position={{ bottom: '8%', left: '37%' }}
+              subtitle="Biochar & Digestate"
             />
 
-            {/* Emission Reduction Indicator */}
-            <div className="absolute top-0 right-0 bg-green-100 border-2 border-green-400 rounded-lg p-3 shadow">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🏭</span>
-                <div>
-                  <p className="text-xs font-semibold text-green-800">Reduces +</p>
-                  <p className="text-xs text-green-700">GHG Emissions</p>
-                </div>
+            {/* Emission Reduction Badge - Smaller, Top Right Corner */}
+            <div className="absolute top-2 right-2 bg-green-50/80 border border-green-300 rounded px-2 py-1 shadow-sm">
+              <div className="flex items-center gap-1">
+                <span className="text-sm">🌱</span>
+                <p className="text-[10px] font-medium text-green-700">-90% Emissions</p>
               </div>
             </div>
 
-            {/* Animated Flow Paths - Proposed System */}
+            {/* Animated Flow Paths - Proposed System (Vertical Layout) */}
             
-            {/* Chicken to AD - Brown particles for manure/litter */}
-            <AnimatedFlowPath
+            {/* Chicken House to AD - Used litter (horizontal right) */}
+            <AnimatedIcon
               id="chicken-to-ad"
-              startX="25"
-              startY="18"
-              endX="40"
-              endY="35"
-              color="#A67C52"
-              particleColor="#8B4513"
-              particleCount={4}
-              duration={4000}
-            />
-            
-            {/* Chicken to Pyrolysis - Brown particles for fresh litter */}
-            <AnimatedFlowPath
-              id="chicken-to-pyrolysis"
-              startX="30"
-              startY="12"
-              endX="62"
-              endY="12"
-              color="#A67C52"
-              particleColor="#8B4513"
-              particleCount={3}
+              startX="18"
+              startY="47"
+              endX="42"
+              endY="45"
+              iconPath="/images/flow-icons/litter.svg"
+              iconSize={35}
               duration={3500}
+              label="Used Litter"
+              labelColor="gray"
+              tooltipData={{
+                title: "USED POULTRY LITTER",
+                metrics: [
+                  { label: "Processing Volume", value: "50-100 tons/day", icon: "📦" },
+                  { label: "Ammonia Content", value: "3-5% (High)", icon: "💨" },
+                  { label: "Methane Potential", value: "200-300 m³/ton", icon: "⚡" },
+                  { label: "Energy Recovery", value: "70-80%", icon: "🔋" }
+                ],
+                highlights: [
+                  "♻️ Captures nutrients for reuse",
+                  "🌍 Eliminates landfill disposal",
+                  "⚡ Generates renewable energy"
+                ]
+              }}
             />
             
-            {/* Processing to AD - Red particles for waste */}
-            <AnimatedFlowPath
-              id="processing-to-ad"
-              startX="25"
-              startY="82"
-              endX="40"
-              endY="52"
-              color="#DC2626"
-              particleColor="#EF4444"
-              particleCount={3}
-              duration={3800}
-            />
-            
-            {/* AD to Pyrolysis - Orange particles for syngas */}
-            <AnimatedFlowPath
-              id="ad-to-pyrolysis"
-              startX="52"
-              startY="35"
-              endX="62"
-              endY="20"
-              color="#F97316"
-              particleColor="#FB923C"
-              particleCount={5}
-              duration={2500}
-            />
-            
-            {/* Pyrolysis to Farm - Purple particles for biochar */}
-            <AnimatedFlowPath
-              id="pyrolysis-to-farm"
-              startX="75"
-              startY="20"
-              endX="75"
-              endY="75"
-              color="#8E44AD"
-              particleColor="#A855F7"
-              particleCount={4}
-              duration={4500}
-              strokeWidth={3}
-            />
-            
-            {/* AD to Farm - Blue particles for digestate */}
-            <AnimatedFlowPath
-              id="ad-to-farm"
-              startX="52"
-              startY="48"
-              endX="62"
-              endY="80"
-              color="#3498DB"
-              particleColor="#60A5FA"
-              particleCount={3}
+            {/* Chicken House to Pyrolysis - Fresh litter (diagonal up-right) */}
+            <AnimatedIcon
+              id="chicken-to-pyrolysis"
+              startX="18"
+              startY="40"
+              endX="72"
+              endY="15"
+              iconPath="/images/flow-icons/fresh-litter.svg"
+              iconSize={35}
               duration={4000}
+              label="Fresh Litter"
+              labelColor="gray"
+              tooltipData={{
+                title: "FRESH PINE LITTER",
+                metrics: [
+                  { label: "Carbon Content", value: "45-50% (High)", icon: "⚫" },
+                  { label: "Moisture Content", value: "8-12%", icon: "💧" },
+                  { label: "Energy Value", value: "18-20 MJ/kg", icon: "🔥" },
+                  { label: "Biochar Yield", value: "25-30%", icon: "🌱" }
+                ],
+                highlights: [
+                  "♻️ Optimal for biochar production",
+                  "🌲 Renewable resource from forestry",
+                  "⚡ High energy density for pyrolysis"
+                ]
+              }}
+            />
+            
+            {/* Processing Plant to AD - Waste (straight down) */}
+            <AnimatedIcon
+              id="processing-to-ad"
+              startX="47"
+              startY="20"
+              endX="47"
+              endY="35"
+              iconPath="/images/flow-icons/waste.svg"
+              iconSize={35}
+              duration={3000}
+              label="Waste"
+              labelColor="gray"
+              tooltipData={{
+                title: "PROCESSING WASTE (FOG)",
+                metrics: [
+                  { label: "Organic Content", value: "90-95%", icon: "🧫" },
+                  { label: "Methane Yield", value: "350-450 m³/ton", icon: "⚡" },
+                  { label: "Processing Time", value: "20-30 days", icon: "⏱️" },
+                  { label: "Energy Recovery", value: "85-90%", icon: "🔋" }
+                ],
+                highlights: [
+                  "♻️ 100% waste diversion from landfill",
+                  "⚡ High-value RNG production",
+                  "🌍 Eliminates methane emissions"
+                ]
+              }}
+            />
+            
+            {/* AD to Pyrolysis - Syngas energy (diagonal up-right) */}
+            <AnimatedIcon
+              id="ad-to-pyrolysis"
+              startX="54"
+              startY="40"
+              endX="72"
+              endY="20"
+              iconPath="/images/flow-icons/syngas.svg"
+              iconSize={35}
+              duration={2800}
+              label="Syngas"
+              labelColor="purple"
+              tooltipData={{
+                title: "SYNGAS (RENEWABLE GAS)",
+                metrics: [
+                  { label: "Energy Value", value: "$6-12/MMBTU", icon: "⚡" },
+                  { label: "Fossil Fuel Replacement", value: "100%", icon: "🔥" },
+                  { label: "Energy Self-Sufficiency", value: "Complete", icon: "🔋" }
+                ],
+                highlights: [
+                  "♻️ Powers the pyrolysis process",
+                  "💡 Zero external energy needed",
+                  "🌍 Eliminates fossil fuel dependency"
+                ]
+              }}
+            />
+            
+            {/* Pyrolysis to Farm - Biochar (straight down) */}
+            <AnimatedIcon
+              id="pyrolysis-to-farm"
+              startX="78"
+              startY="20"
+              endX="55"
+              endY="75"
+              iconPath="/images/flow-icons/biochar.svg"
+              iconSize={40}
+              duration={4500}
+              label="Biochar"
+              labelColor="green"
+              tooltipData={{
+                title: "BIOCHAR",
+                metrics: [
+                  { label: "Carbon Sequestration", value: "2.5 tonnes CO₂e/ton", icon: "🌍" },
+                  { label: "Market Value", value: "$250-500/ton", icon: "💰" },
+                  { label: "Soil Stability", value: "1000+ years", icon: "⏳" },
+                  { label: "Fertilizer Replacement", value: "100%", icon: "🌾" }
+                ],
+                highlights: [
+                  "♻️ Closes the circular economy loop",
+                  "💡 Replaces synthetic fertilizers",
+                  "🌱 Improves soil water retention"
+                ]
+              }}
+            />
+            
+            {/* AD to Farm - Digestate liquid (straight down) */}
+            <AnimatedIcon
+              id="ad-to-farm"
+              startX="47"
+              startY="55"
+              endX="47"
+              endY="75"
+              iconPath="/images/flow-icons/digestate.svg"
+              iconSize={35}
+              duration={3800}
+              label="Digestate"
+              labelColor="blue"
+              tooltipData={{
+                title: "DIGESTATE LIQUID",
+                metrics: [
+                  { label: "Phosphorus Recovery", value: "95%", icon: "🧪" },
+                  { label: "Nitrogen Recovery", value: "70%", icon: "🌿" },
+                  { label: "Fertilizer Value", value: "High NPK", icon: "💧" }
+                ],
+                highlights: [
+                  "♻️ Natural liquid fertilizer",
+                  "🌊 Zero water pollution",
+                  "🌾 Replaces chemical fertilizers"
+                ]
+              }}
+            />
+            
+            {/* Biochar returns to Chicken House (circular!) */}
+            <AnimatedIcon
+              id="biochar-to-chicken"
+              startX="38"
+              startY="78"
+              endX="18"
+              endY="50"
+              iconPath="/images/flow-icons/biochar.svg"
+              iconSize={30}
+              duration={4500}
+              label="Biochar Return"
+              labelColor="green"
+              tooltipData={{
+                title: "BIOCHAR RETURN (CIRCULAR)",
+                metrics: [
+                  { label: "Application Rate", value: "5-10% of litter", icon: "📊" },
+                  { label: "Reuse Cycle", value: "Every 60 days", icon: "🔄" },
+                  { label: "Carbon Permanence", value: "1000+ years", icon: "⏳" },
+                  { label: "Ammonia Reduction", value: "90%", icon: "💨" }
+                ],
+                highlights: [
+                  "♻️ Completes the circular economy",
+                  "🌱 Zero-waste system achieved",
+                  "🏡 Improves chicken health & air quality"
+                ]
+              }}
             />
 
-            {/* Flow Labels */}
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '26%', left: '30%' }}>
-              Litter
-            </div>
-            
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '6%', left: '42%' }}>
-              Fresh Litter
-            </div>
-            
-            <div className="absolute text-xs font-medium text-gray-700 bg-white px-2 py-1 rounded shadow" style={{ top: '60%', left: '30%' }}>
-              Waste
-            </div>
-            
-            <div className="absolute text-xs font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded shadow font-semibold" style={{ top: '26%', left: '56%' }}>
-              Syngas
-            </div>
-            
-            <div className="absolute text-xs font-medium text-purple-800 bg-purple-100 px-2 py-1 rounded shadow font-semibold" style={{ top: '45%', right: '12%' }}>
-              Decaked Litter<br/>+ Biochar
-            </div>
-            
-            <div className="absolute text-xs font-medium text-blue-700 bg-blue-50 px-2 py-1 rounded shadow" style={{ top: '60%', left: '54%' }}>
-              Digestate<br/>Liquid
+            {/* Process Output Badge - Right Side */}
+            <div className="absolute bg-purple-50/90 border border-purple-300 rounded-lg px-3 py-2 shadow-sm" style={{ top: '15%', right: '2%' }}>
+              <p className="text-[10px] font-semibold text-purple-800">Pyrolysis Output:</p>
+              <p className="text-[9px] text-purple-700">Biochar + Decaked Litter</p>
             </div>
 
-            {/* "Reduces Fertilizer Runoff" Badge */}
-            <div className="absolute bottom-8 right-48 bg-green-100 border border-green-400 rounded px-2 py-1">
-              <p className="text-xs font-semibold text-green-800">Reduces</p>
-              <p className="text-xs text-green-700">Fertilizer</p>
-              <p className="text-xs text-green-700">Runoff</p>
+            {/* Environmental Impact Badge - Bottom */}
+            <div className="absolute bg-green-50/80 border border-green-300 rounded px-2 py-1 shadow-sm" style={{ bottom: '4%', left: '5%' }}>
+              <p className="text-[10px] font-medium text-green-700">♻️ Zero Fertilizer Runoff</p>
             </div>
           </>
         )}
