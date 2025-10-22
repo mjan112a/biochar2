@@ -257,15 +257,15 @@ export default function IntellectualPropertyPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">2. STRUCTURAL CLARITY:</p>
-                  <p className="text-gray-700">Added specific connections ("fluidly connected", "in fluid communication", "in electronic communication")</p>
+                  <p className="text-gray-700">Added specific connections (&quot;fluidly connected&quot;, &quot;in fluid communication&quot;, &quot;in electronic communication&quot;)</p>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">3. DEFINITE LIMITATIONS:</p>
-                  <p className="text-gray-700">Changed vague terms like "enhance" to specific "increase by at least 20%"</p>
+                  <p className="text-gray-700">Changed vague terms like &quot;enhance&quot; to specific &quot;increase by at least 20%&quot;</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">4. FUNCTIONAL LANGUAGE:</p>
-                  <p className="text-gray-700">All functions tied to structure performing the function</p>
+                  <p className="font-semibold text-gray-800">1. ANTECEDENT BASIS:</p>
+                  <p className="text-gray-700">Fixed throughout - proper &quot;a/an&quot; introduction then &quot;said/the&quot; reference</p>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">5. § 101 COMPLIANCE:</p>
