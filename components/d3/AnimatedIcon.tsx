@@ -163,9 +163,7 @@ export function AnimatedIcon({
           width={iconSize}
           height={iconSize}
           style={{ 
-            filter: isHovered 
-              ? 'drop-shadow(0 4px 12px rgba(59, 130, 246, 0.6))' 
-              : 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
+            filter: isHovered ? 'drop-shadow(0 4px 12px rgba(59, 130, 246, 0.6))' : 'none',
             pointerEvents: 'none',
           }}
         />
@@ -182,9 +180,17 @@ export function AnimatedIcon({
             }}
           >
             <div className="bg-white border-2 border-blue-400 rounded-lg shadow-2xl p-3">
-              {/* Title */}
+              {/* Title with Icon */}
               <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-200">
-                <span className="text-lg">🌱</span>
+                <div className="w-8 h-8 flex-shrink-0">
+                  <Image
+                    src={iconPath}
+                    alt="Icon"
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
+                </div>
                 <h4 className="font-bold text-sm text-gray-900">{tooltipData.title}</h4>
               </div>
 

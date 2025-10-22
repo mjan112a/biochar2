@@ -59,31 +59,28 @@ export default function ComponentDetailPage() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Image
-                src="/images/wastehub-logo.png"
-                alt="WasteHub"
-                width={200}
-                height={60}
-                className="h-12 w-auto"
-                priority
-              />
-              <div className="h-8 w-px bg-gray-300" />
-              <div>
-                <Link 
-                  href="/" 
-                  className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 mb-1"
-                >
-                  <ArrowLeft size={16} />
-                  Back to Overview
-                </Link>
-                <h1 className="text-xl font-bold text-gray-900">
-                  {componentData.name}
-                </h1>
-              </div>
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/wastehub-logo.png"
+              alt="WasteHub"
+              width={200}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
+            <div className="h-8 w-px bg-gray-300" />
+            <div>
+              <Link 
+                href="/" 
+                className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 mb-1"
+              >
+                <ArrowLeft size={16} />
+                Back to Overview
+              </Link>
+              <h1 className="text-xl font-bold text-gray-900">
+                {componentData.name}
+              </h1>
             </div>
-            <ToggleSwitch />
           </div>
         </div>
       </header>
@@ -97,6 +94,13 @@ export default function ComponentDetailPage() {
                 <Icon name={componentId} size="xl" className="text-gray-700" />
               </div>
               <div className="flex-1">
+                {componentData.classification && (
+                  <div className="mb-2">
+                    <span className="text-xs font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">
+                      {componentData.classification}
+                    </span>
+                  </div>
+                )}
                 <h2 className="text-3xl font-bold mb-2 text-gray-900">
                   {componentData.name}
                 </h2>
@@ -119,6 +123,11 @@ export default function ComponentDetailPage() {
         {/* Current/Proposed Comparison */}
         <section className="mb-8">
           <div className="bg-white rounded-2xl shadow-lg p-8">
+            {/* Toggle Switch - Repositioned */}
+            <div className="flex justify-center mb-6">
+              <ToggleSwitch />
+            </div>
+            
             <h3 className="text-2xl font-bold mb-6 text-gray-900">
               {systemView === 'current' ? 'Current System' : 'Proposed System'}
             </h3>
@@ -153,8 +162,10 @@ export default function ComponentDetailPage() {
                   <SubsystemDiagram
                     componentId={componentId as ComponentName}
                     componentName={componentData.name}
+                    actions={currentViewData?.actions}
                     inputs={currentViewData?.inputs || []}
                     outputs={currentViewData?.outputs || []}
+                    impacts={currentViewData?.impacts}
                   />
                 </div>
               </>

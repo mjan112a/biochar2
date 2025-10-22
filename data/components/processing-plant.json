@@ -1,109 +1,140 @@
 {
   "id": "processing-plant",
   "name": "Processing Plant",
-  "description": "Central facility processing 1 million birds per week, generating 1,000 tons of litter weekly from nearby farms",
+  "description": "Chicken slaughter, waste disposal, and energy consumption facility",
+  "classification": "Chicken Slaughter, Waste Disposal, Energy Consumption",
   "keyMetric": {
-    "label": "Annual Processing Capacity",
-    "value": "52,000 tons/year"
+    "label": "RNG Value",
+    "value": "Competitive RNG pricing"
   },
   "current": {
-    "description": "Processing plants serve as collection hubs for litter from multiple nearby farms, creating logistics and storage challenges",
+    "description": "Traditional processing generates significant waste streams sent to landfill and requires fossil fuel energy",
+    "actions": ["Chicken Slaughter", "Waste Disposal", "Energy Consumption"],
     "inputs": [
       {
         "type": "material",
-        "label": "Live chickens",
-        "amount": "From farms"
-      },
-      {
-        "type": "manure",
-        "label": "Litter from farms",
-        "amount": "1,000 tons/week"
+        "label": "Live Chickens",
+        "icon": "🐔"
       },
       {
         "type": "energy",
-        "label": "Fossil fuels",
-        "amount": "For operations"
+        "label": "Fossil Fuels",
+        "icon": "🛢️",
+        "emphasis": true
+      },
+      {
+        "type": "energy",
+        "label": "Electricity",
+        "icon": "⚡"
       }
     ],
     "outputs": [
       {
-        "type": "material",
-        "label": "Processed chicken products"
+        "type": "product",
+        "label": "Meat",
+        "icon": "🍗"
       },
       {
-        "type": "manure",
-        "label": "Processing waste/offal",
-        "amount": "→ Direct to land"
+        "type": "waste",
+        "label": "FOG (Fats, Oils, Greases)",
+        "icon": "💧"
       },
       {
-        "type": "manure",
-        "label": "Stockpiled litter",
-        "amount": "52,000 tons/year → Land"
+        "type": "waste",
+        "label": "Landfill (for FOG)",
+        "amount": "Disposal required",
+        "icon": "🗑️",
+        "emphasis": true,
+        "reduction": true
       }
     ],
+    "impacts": {
+      "detriments": ["GHG Emissions (Detriment)"]
+    },
     "issues": [
-      "Collection and transportation costs",
-      "Storage and handling challenges",
-      "Methane emissions from stockpiling",
-      "Odor complaints from neighbors",
-      "Environmental regulatory pressure",
-      "Limited disposal options"
+      "High fossil fuel dependency",
+      "FOG disposal costs required",
+      "Greenhouse gas emissions from energy use",
+      "Waste transportation costs"
     ]
   },
   "proposed": {
-    "description": "Centralized conversion facility co-located with processing plant for optimal logistics and economies of scale",
+    "description": "Integrated waste-to-energy system using FOG for renewable natural gas production",
+    "actions": ["Chicken Slaughter", "Waste Preparation", "Energy Consumption"],
     "inputs": [
       {
         "type": "material",
-        "label": "Live chickens",
-        "amount": "From farms"
+        "label": "Live Chickens",
+        "icon": "🐔"
       },
       {
-        "type": "manure",
-        "label": "Fresh litter",
-        "amount": "52,000 tons/year from farms"
+        "type": "energy",
+        "label": "Fossil Fuels (for energy)",
+        "amount": "Reduced usage",
+        "icon": "🛢️"
+      },
+      {
+        "type": "material",
+        "label": "Offal",
+        "icon": "🥩"
+      },
+      {
+        "type": "material",
+        "label": "DAF FOG",
+        "icon": "💧"
+      },
+      {
+        "type": "material",
+        "label": "Other",
+        "icon": "📦"
       }
     ],
     "outputs": [
       {
-        "type": "material",
-        "label": "Processed chicken products"
+        "type": "product",
+        "label": "Meat",
+        "icon": "🍗"
       },
       {
-        "type": "manure",
-        "label": "Offal/DAF/FOG",
-        "amount": "→ Anaerobic digester"
+        "type": "waste",
+        "label": "FOG (Fats, Oils, Greases)",
+        "amount": "To anaerobic digester",
+        "icon": "♻️",
+        "highlight": true
       },
       {
-        "type": "material",
-        "label": "Dead chickens",
-        "amount": "→ Anaerobic digester"
-      },
-      {
-        "type": "manure",
-        "label": "Litter to AD",
-        "amount": "50-70% of input"
-      },
-      {
-        "type": "manure",
-        "label": "Dry litter to pyrolysis",
-        "amount": "30-50% of input"
+        "type": "energy",
+        "label": "Anaerobic digester (for FOG)",
+        "icon": "⚡",
+        "highlight": true
       }
     ],
+    "impacts": {
+      "benefits": [
+        "Reduced landfill",
+        "Energy from pyrolysis"
+      ],
+      "visualReductions": [
+        {
+          "item": "Landfill",
+          "from": "🗑️🗑️🗑️",
+          "to": "⌀",
+          "description": "Complete FOG waste diverted from landfill"
+        }
+      ]
+    },
     "benefits": [
-      "Minimized transportation distances",
-      "Economies of scale: $15-30M revenue potential per facility",
-      "Eliminated storage and odor issues",
-      "Multiple revenue streams from single input",
-      "100+ construction jobs, 20-30 permanent operations jobs",
-      "Converted liability to asset",
-      "Strategic location near poultry-dense regions"
+      "Complete FOG waste diverted from landfill to energy production",
+      "Competitive revenue from renewable natural gas",
+      "Reduced fossil fuel dependency",
+      "Lower carbon footprint",
+      "Eliminated waste disposal costs"
     ]
   },
   "technicalDetails": {
-    "scale": "Typical plant processes 1M birds/week = 52M birds/year",
-    "serviceArea": "10-20 farms within close proximity",
-    "optimalLocation": "Dense poultry regions: Delmarva, Southeast, Arkansas",
-    "economics": "4-5 year payback at 100,000+ tonnes/year scale"
+    "scale": "Large-scale processing with high daily bird capacity",
+    "fogProduction": "Substantial daily FOG generation",
+    "energyValue": "High methane potential from FOG",
+    "processing": "Slaughter, evisceration, packaging"
   }
 }

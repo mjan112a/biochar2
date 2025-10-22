@@ -8,6 +8,7 @@
 import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
+import { ToggleSwitch } from '@/components/system/ToggleSwitch';
 import { useSystemView } from '@/hooks/useSystemView';
 import { ComponentName } from '@/types';
 import { AnimatedFlowPath } from '@/components/d3/AnimatedFlowPath';
@@ -92,6 +93,11 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
 
   return (
     <div className="relative bg-white rounded-2xl shadow-lg p-8" style={{ minHeight: '700px' }}>
+      {/* Toggle Switch - Centered above title */}
+      <div className="flex justify-center mb-6">
+        <ToggleSwitch />
+      </div>
+      
       <h2 className="text-2xl font-bold mb-8 text-center text-gray-900">
         System Flow Diagram
       </h2>
@@ -163,7 +169,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="38"
               endX="8"
               endY="45"
-              iconPath="/images/flow-icons/pine-shavings.svg"
+              iconPath="/images/flow-icons/pine-shavings.png"
               iconSize={35}
               duration={3000}
               label="Pine Shavings"
@@ -191,7 +197,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="52"
               endX="8"
               endY="50"
-              iconPath="/images/flow-icons/chicken-feed.svg"
+              iconPath="/images/flow-icons/chicken-feed.png"
               iconSize={35}
               duration={3200}
               label="Chicken Feed"

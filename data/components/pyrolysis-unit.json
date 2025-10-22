@@ -1,103 +1,81 @@
 {
   "id": "pyrolysis-unit",
   "name": "Pyrolysis Unit",
-  "description": "Thermal conversion system operating at 400-600°C producing biochar, bio-oil, and hydrogen-rich syngas",
+  "description": "Thermal conversion process producing biochar, syngas energy, and carbon sequestration",
+  "classification": "Pyrolysis, Biochar Production, Carbon Sequestration",
   "keyMetric": {
-    "label": "Biochar Yield",
-    "value": "40-50% by weight"
+    "label": "Carbon Sequestration",
+    "value": "Significant carbon storage"
   },
   "current": {
-    "description": "No commercial pyrolysis deployment for poultry litter - technology gap represents market opportunity",
-    "inputs": [
-      {
-        "type": "manure",
-        "label": "Raw litter",
-        "amount": "High moisture content"
-      }
-    ],
-    "outputs": [
-      {
-        "type": "manure",
-        "label": "Wasted potential",
-        "amount": "Energy unused"
-      }
-    ],
+    "description": "This component does not exist in current practice. Digestate would typically be land-applied without additional processing.",
+    "actions": ["Does not exist in current practice"],
+    "inputs": [],
+    "outputs": [],
+    "impacts": {
+      "detriments": ["Does not exist in current practice"]
+    },
     "issues": [
       "No carbon sequestration",
-      "No biochar production",
-      "Energy content wasted",
-      "Nutrients not preserved",
-      "Lost revenue opportunities",
-      "Pilot-scale only, not commercial"
+      "No biochar production for soil amendment",
+      "No energy recovery from residual organics",
+      "Limited value extraction from digestate"
     ]
   },
   "proposed": {
-    "description": "Integrated pyrolysis producing biochar while generating syngas to enhance anaerobic digestion",
+    "description": "Advanced pyrolysis system converting digestate into valuable biochar for circular use while capturing energy and sequestering carbon",
+    "actions": ["Pyrolysis", "Biochar Production", "Carbon Sequestration"],
     "inputs": [
       {
-        "type": "manure",
-        "label": "Dried/decaked litter",
-        "amount": "30-50% from processing plant"
-      },
-      {
         "type": "material",
-        "label": "Digestate liquids",
-        "amount": "From AD for drying"
-      },
-      {
-        "type": "energy",
-        "label": "Process heat",
-        "amount": "From syngas combustion"
+        "label": "Digestate (from Anaerobic Digester)",
+        "icon": "🌱",
+        "highlight": true
       }
     ],
     "outputs": [
       {
         "type": "biochar",
-        "label": "Biochar to chicken house",
-        "amount": "For bedding (fresh litter mix)"
-      },
-      {
-        "type": "biochar",
-        "label": "Biochar to AD",
-        "amount": "5-20 g/L enhancement"
-      },
-      {
-        "type": "biochar",
-        "label": "Biochar to farm",
-        "amount": "Soil amendment (carbon sequestered)"
-      },
-      {
-        "type": "gas",
-        "label": "Syngas/H₂ to AD",
-        "amount": "Methane enhancement"
+        "label": "Biochar",
+        "amount": "For chicken house bedding",
+        "icon": "⚫",
+        "highlight": true
       },
       {
         "type": "energy",
-        "label": "Syngas/Energy",
-        "amount": "Process heat (sim/hot water)"
+        "label": "Syngas (Energy)",
+        "icon": "🔥",
+        "highlight": true
       },
       {
-        "type": "material",
-        "label": "Bio-oil",
-        "amount": "112-120 kg/ton (28-30% yield)"
+        "type": "environmental",
+        "label": "Carbon Sequestration",
+        "icon": "🌍",
+        "highlight": true
       }
     ],
+    "impacts": {
+      "benefits": [
+        "Long-term carbon storage",
+        "Renewable energy generation",
+        "Circular biochar production",
+        "Waste valorization"
+      ]
+    },
     "benefits": [
-      "Carbon sequestration: 120-160 kg CO₂/ton litter",
-      "75-80% phosphorus retention in biochar",
-      "80-85% potassium retention",
-      "Syngas enhances digester methane by 20%+",
-      "Net energy output ratio: 4-7.6:1",
-      "Thermal self-sufficiency through heat recovery",
-      "4-house farm: 3,278 MMBtu/year net useable heat"
+      "Significant carbon sequestration per ton of biochar produced",
+      "Biochar returns to chicken houses, closing the circular loop",
+      "Syngas energy can power operations",
+      "Valuable carbon credits potential",
+      "Grant support available",
+      "Long-term soil improvement benefits",
+      "Reduced ammonia emissions when used in poultry operations"
     ]
   },
   "technicalDetails": {
-    "temperature": "400-600°C optimal for poultry litter",
-    "residence": "30-90 minutes",
-    "massBalance": "Per 1,000 kg input → 160-200 kg biochar, 112-120 kg bio-oil, 88-120 kg syngas",
-    "biocharProperties": "pH 10-10.5, 42-47% carbon, 50+ m²/g surface area",
-    "carbonStability": "65-89% remains after 100 years",
-    "heatIntegration": "Cascading recovery: pyrolysis → drying → digester heating"
+    "process": "Slow pyrolysis under controlled oxygen-limited conditions",
+    "temperature": "Moderate to high temperature processing",
+    "outputs": "Biochar, syngas, and minimal ash residue",
+    "carbonStability": "Highly stable carbon suitable for long-term sequestration"
   }
 }

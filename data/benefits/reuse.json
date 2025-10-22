@@ -6,49 +6,49 @@
     {
       "title": "Energy Self-Sufficiency",
       "description": "Integrated heat recovery achieves thermal self-sufficiency through cascading energy use.",
-      "metric": "100-150% energy self-sufficient",
+      "metric": "Energy self-sufficient",
       "details": [
-        "Syngas combustion provides pyrolysis heat (400-600°C)",
-        "Excess heat dries incoming litter to <15% moisture",
-        "Low-grade heat maintains digester temperature (35-55°C)",
-        "Net energy output ratio: 4-7.6:1",
+        "Syngas combustion provides pyrolysis heat at high temperature",
+        "Excess heat dries incoming litter to low moisture content",
+        "Low-grade heat maintains optimal digester temperature",
+        "Positive net energy output ratio",
         "Biogas powers farm operations",
-        "Thermal self-sufficiency when moisture <15%"
+        "Thermal self-sufficiency with proper moisture management"
       ]
     },
     {
       "title": "Biochar Returns to Farm",
       "description": "Biochar produced from waste returns to poultry houses as bedding additive, closing the loop.",
-      "metric": "5-10% bedding volume",
+      "metric": "Small proportion bedding addition",
       "details": [
         "Used as poultry bedding additive",
-        "90% ammonia reduction in houses",
+        "Significant ammonia reduction in houses",
         "Improves bird health and performance",
         "Chickens consume some, improving gut health",
         "Acts as moisture manager (sponge effect)",
-        "Enhanced litter eligible for NRCS grants"
+        "Enhanced litter eligible for grant support"
       ]
     },
     {
       "title": "Complete Nutrient Cycling",
       "description": "All nutrients recovered and returned to agricultural use in optimized forms.",
-      "metric": "95% P, 70% N recovery",
+      "metric": "High P and N recovery",
       "details": [
-        "Biochar preserves 75-80% of phosphorus",
+        "Biochar preserves most phosphorus",
         "Digestate contains remaining nitrogen",
         "Slow-release characteristics improve efficiency",
         "No synthetic fertilizer needed",
         "Nutrients stay in agricultural cycle",
-        "Zero environmental loss"
+        "Minimal environmental loss"
       ]
     },
     {
       "title": "Synergistic Integration",
       "description": "Components work together to create benefits exceeding sum of parts.",
-      "metric": "25-37% methane boost",
+      "metric": "Significant methane boost",
       "details": [
-        "Pyrolysis syngas enhances digestion by 20%+",
-        "Biochar addition boosts methane 25-37%",
+        "Pyrolysis syngas enhances digestion substantially",
+        "Biochar addition significantly boosts methane production",
         "Heat from one process powers another",
         "Each waste stream becomes another's input",
         "Unexpected benefits from integration",
@@ -58,7 +58,7 @@
     {
       "title": "Zero Waste Operations",
       "description": "Every input completely utilized with no disposal requirements or environmental releases.",
-      "metric": "100% material utilization",
+      "metric": "Complete material utilization",
       "details": [
         "Litter → Biochar + RNG + Fertilizer",
         "No stockpiling or disposal needed",
@@ -71,11 +71,11 @@
     {
       "title": "Scalable Model",
       "description": "System scales from individual farms to centralized regional facilities.",
-      "metric": "5-150,000 tonnes/year",
+      "metric": "Flexible scale range",
       "details": [
-        "Farm-scale: 5,000-20,000 tonnes/year",
-        "Regional: 30,000-50,000 tonnes/year",
-        "Commercial: 100,000-150,000 tonnes/year",
+        "Farm-scale operations possible",
+        "Regional facilities viable",
+        "Commercial-scale deployment proven",
         "Mobile service models possible",
         "Distributed or centralized deployment",
         "Flexibility matches market needs"

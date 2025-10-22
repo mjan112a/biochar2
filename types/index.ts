@@ -33,6 +33,11 @@ export interface FlowItem {
   type: FlowType;
   label: string;
   amount?: string;
+  icon?: string;
+  highlight?: boolean;
+  emphasis?: boolean;
+  reduction?: boolean;
+  description?: string;
 }
 
 export interface BenefitData {

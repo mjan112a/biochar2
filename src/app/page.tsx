@@ -1,43 +1,47 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { ToggleSwitch } from '@/components/system/ToggleSwitch';
+import Link from 'next/link';
 import { SystemDiagram } from '@/components/system/SystemDiagram';
 import { WelcomeModal } from '@/components/ui/WelcomeModal';
-import { useSystemView } from '@/hooks/useSystemView';
-import { BENEFIT_CATEGORIES } from '@/lib/constants';
-import overviewData from '@/data/system/overview.json';
-import { MousePointer2, Filter, Box } from 'lucide-react';
+import { TitleDropdown } from '@/components/ui/TitleDropdown';
 
 export default function HomePage() {
-  const { systemView } = useSystemView();
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  
-  const currentData = systemView === 'current' ? overviewData.current : overviewData.proposed;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-amber-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Image
-                src="/images/wastehub-logo.png"
-                alt="WasteHub"
-                width={200}
-                height={60}
-                className="h-12 w-auto"
-                priority
-              />
-              <div className="h-8 w-px bg-gray-300" />
-              <h1 className="text-xl font-bold text-gray-900">
-                Poultry Biochar Circularity System
-              </h1>
-            </div>
-            <ToggleSwitch />
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/wastehub-logo.png"
+              alt="WasteHub"
+              width={200}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
+            <div className="h-8 w-px bg-gray-300" />
+            <TitleDropdown />
           </div>
+          
+          {/* Navigation Links */}
+          <nav className="flex items-center gap-4 mt-4 border-t border-gray-200 pt-3">
+            <Link
+              href="/trial-results"
+              className="text-sm font-medium text-gray-700 hover:text-green-600 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+            >
+              📊 Trial Results
+            </Link>
+            <Link
+              href="/intellectual-property"
+              className="text-sm font-medium text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+            >
+              🔒 Intellectual Property
+            </Link>
+          </nav>
         </div>
       </header>
 
@@ -46,183 +50,151 @@ export default function HomePage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section with Quick Start */}
+        {/* Hero Section */}
         <section className="mb-8">
-          <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white">
-            <h2 className="text-4xl font-bold mb-3">
-              Transform Poultry Waste into Valuable Biochar
-            </h2>
-            <p className="text-xl text-green-100 mb-6">
-              Explore an integrated circular economy system converting 52,000 tons/year of waste into renewable energy, carbon credits, and premium soil amendments
-            </p>
-            
-            {/* Quick Start Guide */}
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">📍 How to Use This Tool</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                {/* Step 1 */}
-                <div className="flex gap-3 items-start">
-                  <div className="flex-shrink-0">
-                    <MousePointer2 size={24} className="text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1 text-gray-900">1. Toggle Systems</h4>
-                    <p className="text-sm text-gray-700">
-                      Switch between Current Practice and Proposed System to compare approaches
-                    </p>
-                  </div>
-                </div>
+          <div className="relative h-[500px] rounded-2xl shadow-2xl overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <Image
+                src="/images/hero-biochar.jpg"
+                alt="The Biochar Revolution - Chickens and Biochar"
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+            </div>
 
-                {/* Step 2 */}
-                <div className="flex gap-3 items-start">
-                  <div className="flex-shrink-0">
-                    <Filter size={24} className="text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1 text-gray-900">2. Filter Benefits</h4>
-                    <p className="text-sm text-gray-700">
-                      Click Economic, Environmental, or Reuse to see specific metrics
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div className="flex gap-3 items-start">
-                  <div className="flex-shrink-0">
-                    <Box size={24} className="text-purple-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1 text-gray-900">3. Explore Details</h4>
-                    <p className="text-sm text-gray-700">
-                      Click any component box for detailed inputs, outputs, and benefits
-                    </p>
-                  </div>
-                </div>
+            {/* Content */}
+            <div className="relative h-full flex items-center px-12">
+              <div className="max-w-2xl">
+                <h2 className="text-6xl font-bold mb-4 text-white leading-tight">
+                  THE BIOCHAR
+                  <br />
+                  REVOLUTION
+                </h2>
+                <p className="text-2xl text-white mb-8">
+                  Nourishing Chickens,
+                  <br />
+                  Enriching Earth
+                </p>
+                
+                {/* Start Here Button */}
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('system-overview');
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  SEE HOW IT WORKS
+                </button>
               </div>
+            </div>
+
+            {/* Biochar Innovations Inc. watermark */}
+            <div className="absolute bottom-6 right-6 text-white text-sm">
+              Biochar Innovations Inc.
             </div>
           </div>
         </section>
 
-        {/* System Overview */}
-        <section className="mb-12">
-          <div className="bg-white rounded-2xl shadow-lg p-8">
+        {/* Introduction Section */}
+        <section className="mb-8">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-green-600">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              {currentData.title}
+              Poultry Waste to Value: A Circular Solution
             </h2>
-            <p className="text-lg text-gray-700 mb-6">
-              {currentData.description}
+            
+            <p className="text-lg text-gray-700 mb-4">
+              The poultry industry generates <strong>40+ million tonnes of waste annually</strong>, creating environmental challenges and disposal costs. This integrated system transforms <strong>100% of poultry litter</strong> into biochar, renewable energy, and organic fertilizer—delivering <strong>net-negative carbon emissions</strong> while creating multiple revenue streams.
             </p>
             
-            {systemView === 'current' ? (
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-red-700 mb-3">Current Challenges:</h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {'problems' in currentData && currentData.problems.map((problem: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-red-500 mt-1">⚠</span>
-                      <span>{problem}</span>
-                    </li>
-                  ))}
-                </ul>
+            <p className="text-base text-gray-600 mb-4">
+              Learn about the way this industry works below.  Use the toggle button to compare current practices with the our proposed circular system. <strong>Click each component</strong> to see detailed benefits for farms, processing plants, and the environment.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-4 mt-6">
+              {/* Current Practice */}
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <h3 className="font-semibold text-red-800 mb-2 flex items-center gap-2">
+                  <span>⚠️</span>
+                  Current Practice
+                </h3>
+                <p className="text-sm text-gray-700">
+                  Litter disposal creates nutrient runoff, ammonia emissions, and waste management costs.
+                </p>
               </div>
-            ) : (
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-green-700 mb-3">Key Benefits:</h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {'benefits' in currentData && currentData.benefits.map((benefit: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-green-500 mt-1">✓</span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+              
+              {/* Proposed System */}
+              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
+                <h3 className="font-semibold text-green-800 mb-2 flex items-center gap-2">
+                  <span>✓</span>
+                  Proposed System
+                </h3>
+                <p className="text-sm text-gray-700">
+                  Split-stream processing through anaerobic digestion and pyrolysis captures energy, produces biochar for carbon credits (<strong>$177/tonne CO₂</strong>), and recovers <strong>95% of nutrients</strong>—with <strong>25-37% more methane</strong> than digestion alone.
+                </p>
               </div>
-            )}
-          </div>
-        </section>
-
-        {/* Filter Buttons */}
-        <section className="mb-8">
-          <div className="flex justify-center gap-4">
-            {BENEFIT_CATEGORIES.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveFilter(activeFilter === category.id ? null : category.id)}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                  activeFilter === category.id
-                    ? 'shadow-lg scale-105'
-                    : 'hover:scale-105 hover:shadow-md'
-                }`}
-                style={{
-                  backgroundColor: activeFilter === category.id ? category.color : '#f3f4f6',
-                  color: activeFilter === category.id ? 'white' : '#374151',
-                }}
-              >
-                {category.label}
-              </button>
-            ))}
+            </div>
           </div>
         </section>
 
         {/* System Diagram */}
-        <section>
-          <SystemDiagram activeFilter={activeFilter} />
+        <section id="system-overview">
+          <SystemDiagram activeFilter={null} />
         </section>
-
-        {/* Market Data (Proposed View Only) */}
-        {systemView === 'proposed' && (
-          <section className="mt-8">
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">
-                Market Opportunity
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-lg p-6 shadow">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-2">Carbon Credits</h3>
-                  <p className="text-2xl font-bold text-green-600 mb-1">
-                    {overviewData.marketData.carbonCredits.price}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {overviewData.marketData.carbonCredits.growth} growth
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {overviewData.marketData.carbonCredits.marketShare}
-                  </p>
-                </div>
-                
-                <div className="bg-white rounded-lg p-6 shadow">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-2">Biochar Market</h3>
-                  <p className="text-2xl font-bold text-purple-600 mb-1">
-                    {overviewData.marketData.biocharMarket.bulk}
-                  </p>
-                  <p className="text-xs text-gray-500">Bulk pricing</p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {overviewData.marketData.biocharMarket.growth}
-                  </p>
-                </div>
-                
-                <div className="bg-white rounded-lg p-6 shadow">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-2">USDA Grants</h3>
-                  <p className="text-2xl font-bold text-blue-600 mb-1">
-                    {overviewData.marketData.usdaGrants}
-                  </p>
-                  <p className="text-xs text-gray-500">Through NRCS 336</p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {overviewData.marketData.wasteVolume} available
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-gray-600">
-            © 2025 WasteHub. Converting waste into value through circular economy solutions.
-          </p>
+      {/* Call to Action Footer */}
+      <footer className="relative mt-12 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/footer-background.jpg"
+            alt="Footer Background"
+            fill
+            className="object-cover"
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/70" />
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Waste Hub's Patent-Pending Poultry Bioloop™ Process
+            </h2>
+            <p className="text-xl text-green-50 mb-8 max-w-3xl mx-auto">
+              Transform poultry waste into revenue. Our integrated biochar-energy system delivers measurable results: <strong>lower mortality</strong>, <strong>improved feed conversion</strong>, and <strong>multiple income streams</strong>—while eliminating disposal costs and environmental liabilities.
+            </p>
+            
+            <p className="text-lg text-white mb-6 font-semibold">
+              Ready to pilot this system at your operation?
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button className="bg-white text-green-700 hover:bg-green-50 font-bold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+                Contact Us
+              </button>
+              <button className="bg-green-600 text-white hover:bg-green-500 font-bold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+                Request Trial Proposal
+              </button>
+              <button className="bg-blue-600 text-white hover:bg-blue-500 font-bold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+                Download Technical Brief
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Copyright Bar */}
+        <div className="border-t border-white/20 bg-black/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <p className="text-center text-sm text-white/80">
+              © 2025 WasteHub. Converting waste into value through circular economy solutions.
+            </p>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,107 +1,79 @@
 {
   "id": "anaerobic-digester",
   "name": "Anaerobic Digester",
-  "description": "Two-stage digestion system producing renewable natural gas with 25-37% enhanced methane production when biochar is added",
+  "description": "Biological process converting organic waste into renewable natural gas and valuable digestate",
+  "classification": "Anaerobic Digestion, Bio-Methane Capture",
   "keyMetric": {
-    "label": "Methane Enhancement",
-    "value": "25-37% with biochar"
+    "label": "Methane Increase",
+    "value": "Increased methane production"
   },
   "current": {
-    "description": "Anaerobic digestion alone faces ammonia inhibition challenges and lower methane yields with poultry litter",
-    "inputs": [
-      {
-        "type": "manure",
-        "label": "Poultry litter",
-        "amount": "100% of input"
-      }
-    ],
-    "outputs": [
-      {
-        "type": "gas",
-        "label": "Biogas",
-        "amount": "50-65% methane"
-      },
-      {
-        "type": "material",
-        "label": "Digestate",
-        "amount": "70% mass reduction"
-      }
-    ],
+    "description": "This component does not exist in current practice. Waste materials are sent to landfill instead of being processed for energy recovery.",
+    "actions": ["Does not exist in current practice"],
+    "inputs": [],
+    "outputs": [],
+    "impacts": {
+      "detriments": ["Does not exist in current practice"]
+    },
     "issues": [
-      "Ammonia inhibition from high-nitrogen litter",
-      "Lower methane yields",
-      "pH instability",
-      "Longer retention times required",
-      "Digestate disposal challenges",
-      "Complex nutrient balancing"
+      "No energy recovery from organic waste",
+      "Waste disposal costs",
+      "Lost opportunity for renewable energy generation",
+      "Methane emissions from landfill decomposition"
     ]
   },
   "proposed": {
-    "description": "Integrated system receiving syngas from pyrolysis plus biochar addition for enhanced performance",
+    "description": "Modern anaerobic digestion system processing FOG and litter to generate renewable natural gas while recovering valuable nutrients",
+    "actions": ["Anaerobic Digestion", "Bio-Methane Capture"],
     "inputs": [
       {
-        "type": "manure",
-        "label": "Litter + char",
-        "amount": "50-70% from processing plant"
-      },
-      {
-        "type": "manure",
-        "label": "Offal/DAF/FOG",
-        "amount": "From processing plant"
+        "type": "waste",
+        "label": "FOG (from Processing Plant)",
+        "icon": "💧",
+        "highlight": true
       },
       {
         "type": "material",
-        "label": "Dead chickens",
-        "amount": "From processing plant"
-      },
-      {
-        "type": "gas",
-        "label": "H₂-rich syngas",
-        "amount": "From pyrolysis unit"
-      },
-      {
-        "type": "biochar",
-        "label": "Biochar enhancement",
-        "amount": "5-20 g/L from pyrolysis"
+        "label": "Litter & Char",
+        "icon": "♻️",
+        "highlight": true
       }
     ],
     "outputs": [
       {
-        "type": "gas",
-        "label": "Bio-methane/RNG",
-        "amount": "→ Pipeline (70-110 Nm³/ton)"
-      },
-      {
-        "type": "gas",
-        "label": "CO₂",
-        "amount": "Captured/released"
+        "type": "energy",
+        "label": "Bio-Methane (Renewable Natural Gas)",
+        "icon": "⚡",
+        "highlight": true
       },
       {
         "type": "material",
-        "label": "Digestate liquids",
-        "amount": "→ Pyrolysis unit"
-      },
-      {
-        "type": "material",
-        "label": "Digestate (reduced volume)",
-        "amount": "→ Farm/land application"
+        "label": "Digestate (Nutrient-Rich Fertilizer)",
+        "icon": "🌱",
+        "highlight": true
       }
     ],
+    "impacts": {
+      "benefits": [
+        "Renewable energy generation",
+        "Nutrient recovery for agriculture",
+        "Waste reduction",
+        "Carbon footprint reduction"
+      ]
+    },
     "benefits": [
-      "25-37% more methane production than digestion alone",
-      "32% reduction in ammonia inhibition",
-      "pH buffering to optimal 7.5-8.2 range",
-      "3.38-4.66 day retention (vs 15-30 days typical)",
-      "RNG value: $6-12/MMBTU with RIN/LCFS credits",
-      "4-house farm example: 8,779 MMBtu/year methane",
-      "Biochar provides microbial electron transfer surfaces"
+      "Significantly increased methane production from combining FOG and litter",
+      "Renewable natural gas can power operations or be sold",
+      "Digestate provides valuable organic fertilizer",
+      "Reduced greenhouse gas emissions",
+      "High nutrient recovery from waste streams",
+      "Elimination of waste disposal costs"
     ]
   },
   "technicalDetails": {
-    "configuration": "Two-stage: thermophilic (55°C) then mesophilic (35-37°C)",
-    "retention": "Stage 1: 1-2 days, Stage 2: 3-15 days",
-    "biocharRole": "Conductive surfaces, ammonia adsorption, pH buffer, biofilm support",
-    "energyBalance": "60-75% heat recovery efficiency",
-    "synergisticEffect": "Integration produces unexpected benefits exceeding additive effects"
+    "process": "Mesophilic or thermophilic anaerobic digestion",
+    "retention": "Standard retention time for optimal digestion",
+    "temperature": "Controlled temperature environment",
+    "outputs": "Renewable natural gas and nutrient-rich digestate"
   }
 }

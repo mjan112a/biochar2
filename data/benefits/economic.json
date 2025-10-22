@@ -5,50 +5,50 @@
   "items": [
     {
       "title": "Carbon Credit Sales",
-      "description": "Biochar represents 86-90% of durable carbon removal market with prices rising 18% annually. Premium projects command top pricing.",
-      "metric": "$177-525 per tonne CO₂",
+      "description": "Biochar represents majority of durable carbon removal market with prices rising annually. Premium projects command top pricing.",
+      "metric": "Valuable carbon credit pricing",
       "details": [
-        "Current market price: $177/tonne CO₂ (2025)",
-        "Premium projects: up to $525/tonne",
-        "18% annual price growth",
-        "10,000 tonne facility: $1.4M annually from credits alone",
-        "Microsoft, Meta, JPMorgan buying long-term offtakes",
-        "2.5 tonnes CO₂ removed per tonne biochar produced"
+        "Competitive market pricing for carbon removal",
+        "Premium projects command higher pricing",
+        "Annual price growth trend",
+        "Large-scale facilities generate substantial annual revenue from credits alone",
+        "Major corporations buying long-term offtake agreements",
+        "Significant CO₂ removed per tonne biochar produced"
       ]
     },
     {
       "title": "Biochar Sales",
       "description": "Growing agricultural market with proven ROI. Poultry litter biochar has higher nutrients than wood biochar.",
-      "metric": "$80-1,300 per tonne",
+      "metric": "Competitive pricing",
       "details": [
-        "Bulk wholesale: $80-150/tonne",
-        "Retail market: $600-1,300/tonne",
-        "Agricultural trials: $125-239 added value per tonne",
-        "Two-year payback for farmers",
-        "Market growth: $1.3B → $161B by 2050 (91% CAGR)",
-        "Higher nutrient content than wood biochar = premium pricing"
+        "Bulk wholesale pricing available",
+        "Premium retail market pricing",
+        "Agricultural trials show added value",
+        "Quick payback period for farmers",
+        "Rapidly growing market",
+        "Higher nutrient content than wood biochar = premium pricing potential"
       ]
     },
     {
       "title": "Renewable Natural Gas",
       "description": "Enhanced methane production with premium pricing through environmental credit programs.",
-      "metric": "$6-12 per MMBTU",
+      "metric": "Competitive RNG pricing",
       "details": [
-        "Base RNG price plus premium credits",
-        "D3 RIN credits: +$3-5/MMBTU",
-        "California LCFS credits: +$2-4/MMBTU",
-        "150,000 tonne facility: 750,000 MMBTUs annually",
-        "4-house farm example: 8,779 MMBtu/year",
-        "25-37% more methane than digestion alone"
+        "Base RNG price plus premium environmental credits",
+        "D3 RIN credits provide additional revenue",
+        "California LCFS credits add value",
+        "Large facilities generate substantial energy annually",
+        "Smaller operations still produce meaningful energy output",
+        "Significantly more methane than digestion alone"
       ]
     },
     {
       "title": "Avoided Disposal Costs",
       "description": "Eliminate waste management expenses while converting liability to asset.",
-      "metric": "$10-30 per tonne saved",
+      "metric": "Significant savings",
       "details": [
-        "Current disposal: $10-30/tonne",
-        "52,000 tonnes/year facility: $520K-1.56M saved annually",
+        "Disposal costs eliminated",
+        "Large facilities save substantial amounts annually",
         "Avoided storage and handling costs",
         "Reduced regulatory compliance expenses",
         "Eliminated odor complaint management costs"
@@ -57,25 +57,25 @@
     {
       "title": "Fertilizer Value",
       "description": "High-value nutrient products replace synthetic fertilizer purchases.",
-      "metric": "$400-1,200 per tonne nutrients",
+      "metric": "Premium nutrient value",
       "details": [
-        "Avoided synthetic nitrogen costs: $400-600/tonne N",
-        "Avoided phosphorus costs: $800-1,200/tonne P",
-        "95% phosphorus recovery",
-        "70% nitrogen recovery",
+        "Avoided synthetic nitrogen costs",
+        "Avoided phosphorus costs",
+        "High phosphorus recovery",
+        "High nitrogen recovery",
         "Slow-release characteristics = better efficiency",
-        "NRCS 336 grants: $800/tonne available"
+        "Grant support available"
       ]
     },
     {
       "title": "Improved Poultry Performance",
       "description": "Better air quality and health outcomes translate to significant savings.",
-      "metric": "1-3% mortality reduction",
+      "metric": "Reduced mortality",
       "details": [
-        "1-3% mortality reduction from better air quality",
+        "Lower mortality from better air quality",
         "Improved feed conversion ratios",
-        "Reduced foot damage (feet worth as much as whole chicken)",
-        "Premium pricing in some markets for biochar-raised poultry",
+        "Reduced foot damage (feet have significant value)",
+        "Premium pricing potential in some markets",
         "Lower ventilation and heating costs",
         "Reduced respiratory disease treatment costs"
       ]
@@ -83,12 +83,12 @@
     {
       "title": "Multiple Revenue Streams",
       "description": "Diversified income reduces risk and maximizes return on investment.",
-      "metric": "6+ revenue sources",
+      "metric": "Multiple revenue sources",
       "details": [
         "Carbon credits + biochar + RNG + fertilizer + grants + savings",
-        "150,000 tonne facility: $15-30M revenue potential",
-        "4-5 year payback at commercial scale",
-        "10-30% IRR depending on configuration",
+        "Large facilities have substantial revenue potential",
+        "Reasonable payback period at commercial scale",
+        "Attractive returns depending on configuration",
         "Offtake agreements secure long-term revenue",
         "Multiple income streams reduce market risk"
       ]

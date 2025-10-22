@@ -27,7 +27,24 @@ export function Icon({ name, size = 'md', className = '' }: IconProps) {
   const pixelSize = sizeMap[size];
 
   if (isUsingPlaceholder()) {
-    // Use Lucide React icon
+    // Check if there's a PNG image for this component
+    const pngPath = `/icons/placeholder/${name}.png`;
+    
+    // For now, check specific components that have PNG images
+    if (name === 'processing-plant') {
+      return (
+        <Image
+          src={pngPath}
+          alt={name}
+          width={pixelSize}
+          height={pixelSize}
+          className={className}
+          style={{ objectFit: 'contain' }}
+        />
+      );
+    }
+    
+    // Use Lucide React icon for others
     const LucideIcon = (LucideIcons as unknown as Record<string, LucideIcon>)[iconIdentifier];
     
     if (!LucideIcon) {
