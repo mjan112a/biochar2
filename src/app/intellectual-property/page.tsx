@@ -253,7 +253,7 @@ export default function IntellectualPropertyPage() {
               <div className="space-y-3 text-sm">
                 <div>
                   <p className="font-semibold text-gray-800">1. ANTECEDENT BASIS:</p>
-                  <p className="text-gray-700">Fixed throughout - proper "a/an" introduction then "said/the" reference</p>
+                  <p className="text-gray-700">Fixed throughout - proper &quot;a/an&quot; introduction then &quot;said/the&quot; reference</p>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">2. STRUCTURAL CLARITY:</p>
@@ -264,8 +264,8 @@ export default function IntellectualPropertyPage() {
                   <p className="text-gray-700">Changed vague terms like &quot;enhance&quot; to specific &quot;increase by at least 20%&quot;</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">1. ANTECEDENT BASIS:</p>
-                  <p className="text-gray-700">Fixed throughout - proper &quot;a/an&quot; introduction then &quot;said/the&quot; reference</p>
+                  <p className="font-semibold text-gray-800">4. FUNCTIONAL LANGUAGE:</p>
+                  <p className="text-gray-700">All functions tied to structure performing the function</p>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800">5. § 101 COMPLIANCE:</p>
