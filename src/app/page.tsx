@@ -164,7 +164,7 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
-              Waste Hub's Patent-Pending Poultry Bioloop™ Process
+              Waste Hub&apos;s Patent-Pending Poultry Bioloop™ Process
             </h2>
             <p className="text-xl text-green-50 mb-8 max-w-3xl mx-auto">
               Transform poultry waste into revenue. Our integrated biochar-energy system delivers measurable results: <strong>lower mortality</strong>, <strong>improved feed conversion</strong>, and <strong>multiple income streams</strong>—while eliminating disposal costs and environmental liabilities.
