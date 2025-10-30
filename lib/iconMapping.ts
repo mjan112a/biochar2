@@ -173,6 +173,13 @@ export const iconMapping: IconMapping = {
     category: 'output',
     description: 'Bio-oils from pyrolysis'
   },
+  'water-output': {
+    name: 'Water',
+    filename: 'water.png',
+    path: `${ICON_BASE_PATH}/outputs/water.png`,
+    category: 'output',
+    description: 'Water output'
+  },
   'wood-vinegars': {
     name: 'Wood Vinegars',
     filename: 'wood-vinegars.png',
