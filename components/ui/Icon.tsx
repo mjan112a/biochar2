@@ -1,13 +1,13 @@
 /**
  * Icon Component - Single reusable icon component
- * Automatically switches between placeholder and custom icons based on config
+ * Uses the new organized icon system from /images/system-icons/
  */
 
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import Image from 'next/image';
-import { getIconIdentifier, isUsingPlaceholder } from '@/lib/iconRegistry';
+import { getIconPath } from '@/lib/iconMapping';
 
 export interface IconProps {
   name: string;
@@ -23,46 +23,38 @@ const sizeMap = {
 };
 
 export function Icon({ name, size = 'md', className = '' }: IconProps) {
-  const iconIdentifier = getIconIdentifier(name);
   const pixelSize = sizeMap[size];
-
-  if (isUsingPlaceholder()) {
-    // Check if there's a PNG image for this component
-    const pngPath = `/icons/placeholder/${name}.png`;
-    
-    // For now, check specific components that have PNG images
-    if (name === 'processing-plant') {
-      return (
+  
+  // Get icon path from the new icon mapping system
+  const iconPath = getIconPath(name);
+  
+  // Check if we got a real icon path (not the fallback)
+  if (iconPath && !iconPath.includes('placeholder.svg')) {
+    return (
+      <div className={`relative ${className}`} style={{ width: pixelSize, height: pixelSize }}>
         <Image
-          src={pngPath}
+          src={iconPath}
           alt={name}
-          width={pixelSize}
-          height={pixelSize}
-          className={className}
-          style={{ objectFit: 'contain' }}
+          fill
+          className="object-contain"
+          sizes={`${pixelSize}px`}
         />
-      );
-    }
-    
-    // Use Lucide React icon for others
-    const LucideIcon = (LucideIcons as unknown as Record<string, LucideIcon>)[iconIdentifier];
-    
-    if (!LucideIcon) {
-      console.warn(`Icon "${iconIdentifier}" not found in Lucide icons`);
-      return <LucideIcons.Circle size={pixelSize} className={className} />;
-    }
-
+      </div>
+    );
+  }
+  
+  // Fallback to Lucide icons if no PNG found
+  const lucideIconName = name
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+  
+  const LucideIcon = (LucideIcons as unknown as Record<string, LucideIcon>)[lucideIconName];
+  
+  if (LucideIcon) {
     return <LucideIcon size={pixelSize} className={className} />;
   }
-
-  // Use custom SVG icon
-  return (
-    <Image
-      src={`/icons/custom/${iconIdentifier}`}
-      alt={name}
-      width={pixelSize}
-      height={pixelSize}
-      className={className}
-    />
-  );
+  
+  // Final fallback
+  return <LucideIcons.Circle size={pixelSize} className={className} />;
 }

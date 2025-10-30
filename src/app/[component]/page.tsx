@@ -5,20 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ArrowLeft, ChevronDown } from 'lucide-react';
-import { ToggleSwitch } from '@/components/system/ToggleSwitch';
+import { SubsystemFlowView } from '@/components/system/SubsystemFlowView';
 import { Icon } from '@/components/ui/Icon';
-import { SubsystemDiagram } from '@/components/detail/SubsystemDiagram';
-import { useSystemView } from '@/hooks/useSystemView';
 import { ComponentName } from '@/types';
+import { useSystemData } from '@/hooks/useSystemData';
 import * as Accordion from '@radix-ui/react-accordion';
 import * as Tabs from '@radix-ui/react-tabs';
-
-// Import all component data
-import chickenHouseData from '@/data/components/chicken-house.json';
-import processingPlantData from '@/data/components/processing-plant.json';
-import anaerobicDigesterData from '@/data/components/anaerobic-digester.json';
-import pyrolysisUnitData from '@/data/components/pyrolysis-unit.json';
-import farmWaterwaysData from '@/data/components/farm-waterways.json';
 
 // Import benefits data
 import economicData from '@/data/benefits/economic.json';
@@ -26,14 +18,6 @@ import environmentalData from '@/data/benefits/environmental.json';
 import reuseData from '@/data/benefits/reuse.json';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const componentDataMap: Record<string, any> = {
-  'chicken-house': chickenHouseData,
-  'processing-plant': processingPlantData,
-  'anaerobic-digester': anaerobicDigesterData,
-  'pyrolysis-unit': pyrolysisUnitData,
-  'farm-waterways': farmWaterwaysData,
-};
-
 const benefitsDataMap: Record<string, any> = {
   economic: economicData,
   environmental: environmentalData,
@@ -43,16 +27,26 @@ const benefitsDataMap: Record<string, any> = {
 
 export default function ComponentDetailPage() {
   const params = useParams();
-  const componentId = params.component as string;
-  const { systemView } = useSystemView();
+  const componentId = params.component as ComponentName;
+  const { getComponent } = useSystemData();
   
-  const componentData = componentDataMap[componentId];
+  const component = getComponent(componentId);
   
-  if (!componentData) {
+  if (!component) {
     return <div>Component not found</div>;
   }
 
-  const currentViewData = systemView === 'current' ? componentData.current : componentData.proposed;
+  // For backward compatibility with old component data
+  const componentData = {
+    name: component.name,
+    classification: 'System Component',
+    description: `${component.name} - Part of the biochar circular economy system`,
+    keyMetric: {
+      label: 'Status',
+      value: 'Active'
+    },
+    technicalDetails: null
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-amber-50">
@@ -120,84 +114,9 @@ export default function ComponentDetailPage() {
           </div>
         </section>
 
-        {/* Current/Proposed Comparison */}
+        {/* Current/Proposed Comparison - Now using visual SubsystemFlowView */}
         <section className="mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            {/* Toggle Switch - Repositioned */}
-            <div className="flex justify-center mb-6">
-              <ToggleSwitch />
-            </div>
-            
-            <h3 className="text-2xl font-bold mb-6 text-gray-900">
-              {systemView === 'current' ? 'Current System' : 'Proposed System'}
-            </h3>
-            
-            {/* Check if component is used in current practice */}
-            {systemView === 'current' && (componentId === 'anaerobic-digester' || componentId === 'pyrolysis-unit') ? (
-              <div className="text-center py-12">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-4">
-                  <span className="text-4xl">🚫</span>
-                </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">
-                  Not Used in Current Practice
-                </h4>
-                <p className="text-gray-600 mb-4 max-w-md mx-auto">
-                  This component is part of the proposed circular economy system. 
-                  Toggle to &quot;Proposed System&quot; to see how it integrates into the biochar production process.
-                </p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-lg">
-                  <span className="text-sm text-amber-800">
-                    💡 Switch to <strong>Proposed System</strong> to learn more
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <>
-                <p className="text-gray-700 mb-6">
-                  {currentViewData?.description}
-                </p>
-
-                {/* Subsystem Diagram */}
-                <div className="mb-6">
-                  <SubsystemDiagram
-                    componentId={componentId as ComponentName}
-                    componentName={componentData.name}
-                    actions={currentViewData?.actions}
-                    inputs={currentViewData?.inputs || []}
-                    outputs={currentViewData?.outputs || []}
-                    impacts={currentViewData?.impacts}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Issues or Benefits */}
-            {systemView === 'current' && currentViewData && 'issues' in currentViewData ? (
-              <div>
-                <h4 className="font-semibold text-red-700 mb-3">Key Issues:</h4>
-                <ul className="grid md:grid-cols-2 gap-2">
-                  {currentViewData.issues?.map((issue: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-red-500">⚠</span>
-                      <span>{issue}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : currentViewData && 'benefits' in currentViewData ? (
-              <div>
-                <h4 className="font-semibold text-green-700 mb-3">Key Benefits:</h4>
-                <ul className="grid md:grid-cols-2 gap-2">
-                  {currentViewData.benefits?.map((benefit: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700">
-                      <span className="text-green-500">✓</span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </div>
+          <SubsystemFlowView componentId={componentId} />
         </section>
 
         {/* Benefits Tabs */}

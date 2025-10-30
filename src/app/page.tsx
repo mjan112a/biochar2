@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SystemDiagram } from '@/components/system/SystemDiagram';
+import { SystemDiagramWrapper } from '@/components/system/SystemDiagramWrapper';
 import { WelcomeModal } from '@/components/ui/WelcomeModal';
 import { TitleDropdown } from '@/components/ui/TitleDropdown';
 
@@ -143,7 +143,7 @@ export default function HomePage() {
 
         {/* System Diagram */}
         <section id="system-overview">
-          <SystemDiagram activeFilter={null} />
+          <SystemDiagramWrapper activeFilter={null} />
         </section>
       </main>
 

@@ -5,7 +5,7 @@
 
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import { ToggleSwitch } from '@/components/system/ToggleSwitch';
@@ -15,6 +15,10 @@ import { AnimatedFlowPath } from '@/components/d3/AnimatedFlowPath';
 import { AnimatedCounter } from '@/components/d3/AnimatedCounter';
 import { AnimatedTruck } from '@/components/d3/AnimatedTruck';
 import { AnimatedIcon } from '@/components/d3/AnimatedIcon';
+import { SankeyDiagram } from '@/components/d3/SankeyDiagram';
+import { getIconPath } from '@/lib/iconMapping';
+
+type ViewTab = 'flow' | 'sankey';
 
 interface ComponentBoxProps {
   id: ComponentName;
@@ -85,40 +89,89 @@ const BENEFIT_BADGES: Record<string, BenefitBadge[]> = {
 
 interface SystemDiagramProps {
   activeFilter?: string | null;
+  activeComponents?: string[];
+  systemView?: 'current' | 'proposed';
 }
 
-export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
-  const { systemView } = useSystemView();
+export function SystemDiagram({ activeFilter, activeComponents: providedComponents, systemView: providedView }: SystemDiagramProps) {
+  const { systemView: hookSystemView } = useSystemView();
+  
+  // Use provided values or fall back to hook
+  const systemView = providedView || hookSystemView;
+  const activeComponents = providedComponents || (systemView === 'current'
+    ? ['chicken-house', 'processing-plant', 'farm-waterways']
+    : ['chicken-house', 'processing-plant', 'anaerobic-digester', 'pyrolysis-unit', 'farm-waterways']
+  );
+  
+  // Helper to check if component should be rendered
+  const isComponentActive = (componentId: string) => activeComponents.includes(componentId);
   const diagramRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState<ViewTab>('flow');
 
   return (
     <div className="relative bg-white rounded-2xl shadow-lg p-8" style={{ minHeight: '700px' }}>
-      {/* Toggle Switch - Centered above title */}
+      {/* Tab Navigation */}
+      <div className="flex justify-center mb-6">
+        <div className="inline-flex rounded-lg border-2 border-gray-200 bg-gray-50 p-1">
+          <button
+            onClick={() => setActiveTab('flow')}
+            className={`
+              px-6 py-2 rounded-md font-semibold transition-all duration-300
+              ${activeTab === 'flow'
+                ? 'bg-white text-blue-600 shadow-md'
+                : 'text-gray-600 hover:text-gray-900'
+              }
+            `}
+          >
+            🔄 Flow View
+          </button>
+          <button
+            onClick={() => setActiveTab('sankey')}
+            className={`
+              px-6 py-2 rounded-md font-semibold transition-all duration-300
+              ${activeTab === 'sankey'
+                ? 'bg-white text-blue-600 shadow-md'
+                : 'text-gray-600 hover:text-gray-900'
+              }
+            `}
+          >
+            📊 Material Flow
+          </button>
+        </div>
+      </div>
+
+      {/* Toggle Switch - Centered below tabs */}
       <div className="flex justify-center mb-6">
         <ToggleSwitch />
       </div>
       
       <h2 className="text-2xl font-bold mb-8 text-center text-gray-900">
-        System Flow Diagram
+        {activeTab === 'flow' ? 'System Flow Diagram' : 'Quantitative Material Flows'}
       </h2>
 
-      <div ref={diagramRef} className="relative" style={{ height: '600px' }}>
-        {/* Current Practice View - Vertical Layout */}
-        {systemView === 'current' ? (
+      {/* Conditional Content Based on Active Tab */}
+      {activeTab === 'flow' ? (
+        <div ref={diagramRef} className="relative" style={{ height: '600px' }}>
+          {/* Current Practice View - Vertical Layout */}
+          {systemView === 'current' ? (
           <>
             {/* Processing Plant - TOP CENTER */}
-            <ComponentBox
-              id="processing-plant"
-              name="Processing Plant"
-              position={{ top: '8%', left: '42%' }}
-            />
+            {isComponentActive('processing-plant') && (
+              <ComponentBox
+                id="processing-plant"
+                name="Processing Plant"
+                position={{ top: '8%', left: '42%' }}
+              />
+            )}
 
             {/* Chicken House - LEFT MIDDLE */}
-            <ComponentBox
-              id="chicken-house"
-              name="Chicken House"
-              position={{ top: '42%', left: '8%' }}
-            />
+            {isComponentActive('chicken-house') && (
+              <ComponentBox
+                id="chicken-house"
+                name="Chicken House"
+                position={{ top: '42%', left: '8%' }}
+              />
+            )}
 
             {/* Farm Land Application - BOTTOM CENTER */}
             <div className="absolute cursor-pointer" style={{ bottom: '12%', left: '38%' }}>
@@ -169,7 +222,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="38"
               endX="8"
               endY="45"
-              iconPath="/images/flow-icons/pine-shavings.png"
+              iconPath={getIconPath("Fresh Pine Shavings")}
               iconSize={35}
               duration={3000}
               label="Pine Shavings"
@@ -197,7 +250,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="52"
               endX="8"
               endY="50"
-              iconPath="/images/flow-icons/chicken-feed.png"
+              iconPath={getIconPath("Chicken Feed")}
               iconSize={35}
               duration={3200}
               label="Chicken Feed"
@@ -235,7 +288,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="12"
               endX="72"
               endY="12"
-              iconPath="/images/flow-icons/meat.svg"
+              iconPath={getIconPath("Meat")}
               iconSize={35}
               duration={2800}
               label="Meat"
@@ -263,7 +316,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="25"
               endX="47"
               endY="20"
-              iconPath="/images/flow-icons/fossil-fuel.svg"
+              iconPath={getIconPath("Fossil Fuels")}
               iconSize={35}
               duration={2500}
               label="Fossil Fuels"
@@ -304,7 +357,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="55"
               endX="40"
               endY="75"
-              iconPath="/images/flow-icons/litter.svg"
+              iconPath={getIconPath("Used Poultry Litter")}
               iconSize={35}
               duration={3800}
               label="Used Litter"
@@ -332,7 +385,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="82"
               endX="38"
               endY="82"
-              iconPath="/images/flow-icons/fertilizer.svg"
+              iconPath={getIconPath("Fertilizers")}
               iconSize={35}
               duration={3000}
               label="Fertilizers"
@@ -396,40 +449,50 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
           /* Proposed System View - Improved Spacing */
           <>
             {/* Processing Plant - TOP CENTER */}
-            <ComponentBox
-              id="processing-plant"
-              name="Processing Plant"
-              position={{ top: '5%', left: '40%' }}
-            />
+            {isComponentActive('processing-plant') && (
+              <ComponentBox
+                id="processing-plant"
+                name="Processing Plant"
+                position={{ top: '5%', left: '40%' }}
+              />
+            )}
 
             {/* Chicken House - LEFT MIDDLE (more left) */}
-            <ComponentBox
-              id="chicken-house"
-              name="Chicken House"
-              position={{ top: '42%', left: '5%' }}
-            />
+            {isComponentActive('chicken-house') && (
+              <ComponentBox
+                id="chicken-house"
+                name="Chicken House"
+                position={{ top: '42%', left: '5%' }}
+              />
+            )}
 
             {/* Anaerobic Digester - CENTER (more space from others) */}
-            <ComponentBox
-              id="anaerobic-digester"
-              name="Anaerobic Digester (AD)"
-              position={{ top: '42%', left: '40%' }}
-            />
+            {isComponentActive('anaerobic-digester') && (
+              <ComponentBox
+                id="anaerobic-digester"
+                name="Anaerobic Digester (AD)"
+                position={{ top: '42%', left: '40%' }}
+              />
+            )}
 
             {/* Pyrolysis Unit - TOP RIGHT (more space) */}
-            <ComponentBox
-              id="pyrolysis-unit"
-              name="Pyrolysis"
-              position={{ top: '5%', right: '5%' }}
-            />
+            {isComponentActive('pyrolysis-unit') && (
+              <ComponentBox
+                id="pyrolysis-unit"
+                name="Pyrolysis"
+                position={{ top: '5%', right: '5%' }}
+              />
+            )}
 
             {/* Farm/Waterways - BOTTOM CENTER */}
-            <ComponentBox
-              id="farm-waterways"
-              name="Farmland, Rivers & Lakes"
-              position={{ bottom: '8%', left: '37%' }}
-              subtitle="Biochar & Digestate"
-            />
+            {isComponentActive('farm-waterways') && (
+              <ComponentBox
+                id="farm-waterways"
+                name="Farmland, Rivers & Lakes"
+                position={{ bottom: '8%', left: '37%' }}
+                subtitle="Biochar & Digestate"
+              />
+            )}
 
             {/* Emission Reduction Badge - Smaller, Top Right Corner */}
             <div className="absolute top-2 right-2 bg-green-50/80 border border-green-300 rounded px-2 py-1 shadow-sm">
@@ -448,7 +511,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="47"
               endX="42"
               endY="45"
-              iconPath="/images/flow-icons/litter.svg"
+              iconPath={getIconPath("Used Poultry Litter")}
               iconSize={35}
               duration={3500}
               label="Used Litter"
@@ -476,7 +539,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="40"
               endX="72"
               endY="15"
-              iconPath="/images/flow-icons/fresh-litter.svg"
+              iconPath={getIconPath("Fresh Pine Shavings")}
               iconSize={35}
               duration={4000}
               label="Fresh Litter"
@@ -504,7 +567,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="20"
               endX="47"
               endY="35"
-              iconPath="/images/flow-icons/waste.svg"
+              iconPath={getIconPath("FOG")}
               iconSize={35}
               duration={3000}
               label="Waste"
@@ -532,7 +595,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="40"
               endX="72"
               endY="20"
-              iconPath="/images/flow-icons/syngas.svg"
+              iconPath={getIconPath("Syngas Energy")}
               iconSize={35}
               duration={2800}
               label="Syngas"
@@ -559,7 +622,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="20"
               endX="55"
               endY="75"
-              iconPath="/images/flow-icons/biochar.svg"
+              iconPath={getIconPath("Biochar")}
               iconSize={40}
               duration={4500}
               label="Biochar"
@@ -587,7 +650,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="55"
               endX="47"
               endY="75"
-              iconPath="/images/flow-icons/digestate.svg"
+              iconPath={getIconPath("Digestate Liquids")}
               iconSize={35}
               duration={3800}
               label="Digestate"
@@ -614,7 +677,7 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
               startY="78"
               endX="18"
               endY="50"
-              iconPath="/images/flow-icons/biochar.svg"
+              iconPath={getIconPath("Biochar")}
               iconSize={30}
               duration={4500}
               label="Biochar Return"
@@ -676,16 +739,21 @@ export function SystemDiagram({ activeFilter }: SystemDiagramProps) {
             ))}
           </>
         )}
-      </div>
+        </div>
+      ) : (
+        <SankeyDiagram />
+      )}
 
-      <div className="mt-8 text-center text-sm text-gray-600">
-        <p>Click any component to view detailed information</p>
-        {activeFilter && systemView === 'proposed' && (
-          <p className="mt-2 text-amber-600 font-medium">
-            Showing {activeFilter} benefits - Click the filter again to clear
-          </p>
-        )}
-      </div>
+      {activeTab === 'flow' && (
+        <div className="mt-8 text-center text-sm text-gray-600">
+          <p>Click any component to view detailed information</p>
+          {activeFilter && systemView === 'proposed' && (
+            <p className="mt-2 text-amber-600 font-medium">
+              Showing {activeFilter} benefits - Click the filter again to clear
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
